@@ -618,7 +618,7 @@ a:active {color:white;}
   margin: 24px auto;
   flex-direction: column;
 }
-.new-rant textarea,
+.new-rant .newpostCustom textarea,
 .alert textarea,
 .new-comment textarea {
   background: transparent;
@@ -634,7 +634,7 @@ a:active {color:white;}
   transition: all 0.2s ease-in;
   margin-bottom: 16px;
 }
-.new-rant textarea:focus,
+.new-rant .newpostCustom textarea:focus,
 .alert textarea:focus,
 .new-comment textarea:focus {
   border-color: #1ba749;

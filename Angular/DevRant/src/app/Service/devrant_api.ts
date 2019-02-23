@@ -86,4 +86,17 @@ export class DevRantApiService {
       options
     );
   }
+
+  addNewPost(content: any) {
+    let headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      "X-Token": this.x_token
+    });
+    let options = { headers: headers };
+    return this.http.post(
+      CONST.ADD_NEW_POST,
+      { "content": content },
+      options
+    );
+  }
 }

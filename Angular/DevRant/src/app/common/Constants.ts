@@ -9,6 +9,7 @@ const USER_ACTIVATE = BASE_URL + "/v1/user.activate";
 const USER_DEACTIVATE = BASE_URL + "/v1/user.deactivate";
 const GET_POST_LIST = BASE_URL + "/v1/post.list";
 const VOTE = BASE_URL + "/v1/post.vote";
+const ADD_NEW_POST=BASE_URL+"/v1/post.add";
 
 export default ERROR_MESSAGES;
-export { USER_ACTIVATE, USER_DEACTIVATE, GET_POST_LIST, VOTE };
+export { USER_ACTIVATE, USER_DEACTIVATE, GET_POST_LIST, VOTE,ADD_NEW_POST };

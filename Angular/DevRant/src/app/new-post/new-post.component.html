@@ -3,39 +3,56 @@
 
 <div class="popup popup--open" *ngIf="isOpen">
   <div class="popup__header">
-      <div title="Close" class="close layout--center" (click)="closeNewPost()">
-          X
-      </div>
+    <div title="Close" class="close layout--center" (click)="closeNewPost()">
+      X
+    </div>
   </div>
   <div class="popup__body layout--center">
-      <div class="popup__body-inner">
+    <div class="popup__body-inner">
+      <div class="form">
+        <div class="form__title">NEW <span class="highlight">#</span>RANT</div>
+        <div class="form__description">
+          Express yourself with 140 characters.
+        </div>
+        <form name="new-rant" [formGroup]="angForm" novalidate>
+          <div class="new-rant">
+            <div class="form-group newpostCustom" *ngIf="showInputFeild">
+              <textarea
+                maxlength="140"
+                focus="true"
+                class="form-control"
+                formControlName="content"
+                [(ngModel)]="loginInput.username"
+              ></textarea>
+            </div>
 
-          <div class="form">
-              <div class="form__title">
-                  NEW <span class="highlight">#</span>RANT
-              </div>
-              <div class="form__description">
-                  Express yourself with 140 characters.
-              </div>
-              <form name="new-rant"  [formGroup]="angForm"
-              novalidate>
-                  <div class="new-rant">
-                      <textarea maxlength="140"></textarea>
+            <app-loader></app-loader>
 
-                      <div class="loader">
-                          <div class="spinner"></div>
-                      </div>
-
-                      <div class="form__error">
-                          Some fields are missing !
-                      </div>
-
-                      <input type="submit" value="POST">
+            <div
+                *ngIf="
+                  angForm.controls['content'].invalid &&
+                  (angForm.controls['content'].dirty ||
+                    angForm.controls['content'].touched)
+                "
+              >
+                <div *ngIf="angForm.controls['content'].errors.required">
+                  <div class="form__error">
+                    {{ content_error }}
                   </div>
-              </form>
+                </div>
+              </div>
+            <!-- <div class="newpostCustom"> -->
+                <input
+                  type="submit"
+                  value="POST"
+                  (click)="submitClick()"
+                  [disabled]="angForm.pristine || angForm.invalid || isLoading"
+                />
+              <!-- </div> -->
           </div>
-
+        </form>
       </div>
+    </div>
   </div>
 </div>
 

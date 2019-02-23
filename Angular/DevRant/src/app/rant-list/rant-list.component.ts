@@ -5,6 +5,8 @@ import { post } from 'selenium-webdriver/http';
 import { LoaderService } from '../loader/loader.service';
 import { PostListRefreshService } from './rant-list.service';
 import { NewPostService } from '../new-post/new-post.service';
+import { LocalStorage } from '../common/local-storage';
+import { LoginService } from '../login-popup/login-popup.service';
 
 @Component({
   selector: 'app-rant-list',
@@ -16,9 +18,14 @@ export class RantListComponent implements OnInit {
   // rant:Rant={};
   // rant=new Rant();
   posts:Post;
+  login:boolean;
   // data:{ok:any,posts:any};
 
-  constructor(private devrantApi:DevRantApiService,private loaderService:LoaderService,private refreshService:PostListRefreshService,private newPostService:NewPostService) { }
+  constructor(private loginService: LoginService,private storage: LocalStorage,private devrantApi:DevRantApiService,private loaderService:LoaderService,private refreshService:PostListRefreshService,private newPostService:NewPostService) {
+    if (storage.getStorageData("login") != null) {
+       this.login = storage.getStorageData("login");
+    }
+   }
 
   ngOnInit() {
     console.log("before post list call");
@@ -59,7 +66,12 @@ export class RantListComponent implements OnInit {
   }
 
   openNewPost(){
-    this.newPostService.display(true);
+    if(this.login){
+      this.newPostService.display(true);
+    }else{
+      this.loginService.display(true);
+    }
+    
   }
 
 }
