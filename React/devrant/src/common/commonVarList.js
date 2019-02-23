@@ -27,6 +27,7 @@ const API_URLS = {
     USER_ACTIVATE: 'https://api.devrant.thusitha.site/v1/user.activate',
     USER_DEACTIVATE: 'https://api.devrant.thusitha.site/v1/user.deactivate',
 
+    RANT_DETAILS : 'https://api.devrant.thusitha.site/v1/post.details',
     RANT_LIST : 'https://api.devrant.thusitha.site/v1/post.list',
     VOTE : 'https://api.devrant.thusitha.site/v1/post.vote',
     ADD_RANT : 'https://api.devrant.thusitha.site/v1/post.add'
@@ -34,7 +35,8 @@ const API_URLS = {
 
 const PUBSUB_TOPICS = {
     REFRESH_RANT_LIST : 'REFRESH_RANT_LIST',
-    ALERT : 'ALERT'
+    ALERT : 'ALERT',
+    SHOW_LOGIN : 'SHOW_LOGIN'
 }
 
 export {

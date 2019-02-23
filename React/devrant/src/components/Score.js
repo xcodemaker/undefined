@@ -41,7 +41,8 @@ class Score extends Component {
                 console.error(err)
             })
         }else{
-            this.props.showHideLogin(true)
+            PubSub.publish(PUBSUB_TOPICS.SHOW_LOGIN, '')
+            // this.props.showHideLogin(true)
         }
 
     }

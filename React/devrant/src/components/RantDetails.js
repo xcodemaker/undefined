@@ -6,19 +6,55 @@
 import React, {Component} from 'react';
 import Loader from "./Loader";
 import PubSub from "pubsub-js";
-import {PUBSUB_TOPICS} from "../common/commonVarList";
+import {API_URLS, PUBSUB_TOPICS} from "../common/commonVarList";
+import * as ajaxServices from "../common/ajaxServices";
+import Score from "./Score";
 
 class RantDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoading: true
+            isLoading: true,
+            rant:{
+                author: "",
+                comments: [],
+                content: "",
+                displayTime: "",
+                id: "",
+                isMyPost: false,
+                myVote: 0,
+                timestamp: 0,
+                votes: 0
+            }
         }
+        this.rantId = this.props.match.params.id;
+        // this.rantId = "JBkLYn7FunhZVpomLaADrs";
+        this.loadRantDetails = this.loadRantDetails.bind(this)
     }
-    
-    render() {
-        let rantId = this.props.match.params.rantid;
 
+    loadRantDetails() {
+        ajaxServices.get(API_URLS.RANT_DETAILS, {'postId':this.rantId}).then((data) => {
+            console.log(data)
+            if (data.ok) {
+                this.setState({
+                    rant: data.post
+                })
+            }
+        }).catch((err) => {
+            console.error(err)
+        }).finally(() => {
+            this.setState({
+                isLoading: false
+            })
+        })
+    }
+
+    componentDidMount() {
+        this.loadRantDetails()
+    }
+
+    render() {
+        let rant = this.state.rant;
         return (
             <div>
                 <Loader isLoading={this.state.isLoading}/>
@@ -27,11 +63,8 @@ class RantDetails extends Component {
 
                 <section className="post-hero">
                     <div className="post-hero__inner">
-                        <div className="score">
-                            <div className="score__up layout--center">++</div>
-                            <div className="score__board layout--center">100</div>
-                            <div className="score__down layout--center">--</div>
-                        </div>
+                        <Score rant={rant} showHideLogin={this.props.showHideLogin}/>
+
                         <div className="post-hero__body">
                             <div className="profile">
                                 <div className="profile__picture">
@@ -40,17 +73,17 @@ class RantDetails extends Component {
                                     </svg>
                                 </div>
                                 <div className="profile__name">
-                                    Elon
+                                    {rant.author}
                                 </div>
                             </div>
                             <div className="post__details">
-                                Lorem ipsum
+                                {rant.content}
                             </div>
                         </div>
                     </div>
                     <div className="post-hero__footer">
                         <div className="post-hero__delete">DELETE</div>
-                        <div className="post-hero__time">2m ago</div>
+                        <div className="post-hero__time">{rant.displayTime}</div>
                     </div>
                 </section>
 
