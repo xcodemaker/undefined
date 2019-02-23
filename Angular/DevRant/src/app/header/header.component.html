@@ -16,7 +16,7 @@
 
       <div class="join">
           <span (click)="openLoginPopup()" *ngIf="logout">Join</span>
-          <span *ngIf="login">Sign Out</span>
+          <span *ngIf="login" (click)="clickLogout()">Sign Out</span>
       </div>
   </div>
 </section>

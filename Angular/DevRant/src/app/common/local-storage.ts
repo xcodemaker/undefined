@@ -14,5 +14,9 @@ export class LocalStorage  {
     getStorageData(key:any){
         return this.storage.get(key);
     }
+
+    clearData(key:any){
+        this.storage.remove(key);
+    }
   
   }

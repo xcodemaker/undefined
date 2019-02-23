@@ -1,35 +1,53 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders  } from '@angular/common/http';
-import * as CONST from '../common/Constants';
-
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import * as CONST from "../common/Constants";
+import { LocalStorage } from "../common/local-storage";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class DevRantApiService {
-  
+  x_token: any;
 
-  constructor(private http:HttpClient) { }
-
-
-  
-  userActivate(username:string,password:string){
-    let headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-    });
-     let options = { headers: headers };
-	 return this.http.post(CONST.USER_ACTIVATE,{"username":username,"password":password},options);
+  constructor(private http: HttpClient, private storage: LocalStorage) {
+    if (storage.getStorageData("login") != null) {
+      let login = storage.getStorageData("login");
+      if (login) {
+        this.x_token = storage.getStorageData("token");
+      }
+    }
   }
 
+  userActivate(username: string, password: string) {
+    let headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    let options = { headers: headers };
+    return this.http.post(
+      CONST.USER_ACTIVATE,
+      { username: username, password: password },
+      options
+    );
+  }
 
-//   initArticles(){
-//    return this.http.get('https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey='+this.api_key);
-//   }
+  userDeactivate() {
+    let headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      "X-Token": this.x_token
+    });
+    let options = { headers: headers };
+    return this.http.post(
+      CONST.USER_ACTIVATE,
+      {},
+      options
+    );
+  }
 
-//   getArticlesByID(source: String){
-//    return this.http.get('https://newsapi.org/v2/top-headlines?sources='+source+'&apiKey='+this.api_key);
-//   }
+  //   initArticles(){
+  //    return this.http.get('https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey='+this.api_key);
+  //   }
 
-
-
+  //   getArticlesByID(source: String){
+  //    return this.http.get('https://newsapi.org/v2/top-headlines?sources='+source+'&apiKey='+this.api_key);
+  //   }
 }
