@@ -3,6 +3,7 @@ import { LoginService } from './login-popup.service';
 import { LoaderService } from '../loader/loader.service';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 import ERROR_MESSAGES from '../common/Constants'
+import { DevRantApiService } from '../Service/devrant_api';
 
 @Component({
   selector: 'app-login-popup',
@@ -15,8 +16,12 @@ export class LoginPopupComponent implements OnInit   {
   angForm: FormGroup;
   name_error:any;
   password_error:any;
+  name='';
+  password='';
+  // userName:any;
+  loginInput: any = {};
   //LoaderService is for the spinner
-  constructor(private loginService: LoginService ,private renderer: Renderer2,private loaderService:LoaderService,private fb: FormBuilder) {
+  constructor(private loginService: LoginService ,private renderer: Renderer2,private loaderService:LoaderService,private fb: FormBuilder,private devrantApi:DevRantApiService) {
     this.createForm();
     this.name_error=ERROR_MESSAGES.LOGIN_USERNAME_EMPTY;
     this.password_error=ERROR_MESSAGES.LOGIN_PASSWORD_EMPTY;
@@ -24,8 +29,8 @@ export class LoginPopupComponent implements OnInit   {
 
    createForm() {
     this.angForm = this.fb.group({
-       name: ['', Validators.required ],
-       email: ['', Validators.required ]
+       name: [this.name, Validators.required ],
+       password: [this.password, Validators.required ]
     });
   }
 
@@ -48,7 +53,12 @@ export class LoginPopupComponent implements OnInit   {
   }
 
   submitClick(){
+    console.log("username :"+this.loginInput.username,"pasword :"+this.loginInput.pass);
     this.loaderService.display(true);
+    this.devrantApi.userActivate(this.loginInput.username,this.loginInput.pass).subscribe(data => {
+      console.log(data);
+      this.loaderService.display(false);
+    });
    
   }
 

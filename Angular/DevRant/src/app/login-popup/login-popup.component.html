@@ -29,6 +29,7 @@
                   focus="true"
                   class="form-control"
                   formControlName="name"
+                  [(ngModel)]="loginInput.username"
                 />
               </div>
 
@@ -37,7 +38,8 @@
                   type="password"
                   placeholder="PASSWORD"
                   class="form-control"
-                  formControlName="email"
+                  formControlName="password"
+                  [(ngModel)]="loginInput.pass"
                 />
               </div>
 
@@ -58,12 +60,12 @@
               </div>
               <div
                 *ngIf="
-                  angForm.controls['email'].invalid &&
-                  (angForm.controls['email'].dirty ||
-                    angForm.controls['email'].touched)
+                  angForm.controls['password'].invalid &&
+                  (angForm.controls['password'].dirty ||
+                    angForm.controls['password'].touched)
                 "
               >
-                <div *ngIf="angForm.controls['email'].errors.required">
+                <div *ngIf="angForm.controls['password'].errors.required">
                   <div class="form__error">
                       {{password_error}}
                   </div>

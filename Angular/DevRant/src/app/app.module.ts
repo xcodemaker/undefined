@@ -14,6 +14,7 @@ import { LoginService } from './login-popup/login-popup.service';
 import {FocusModule} from 'angular2-focus';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DevRantApiService } from './Service/devrant_api';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes:Routes=[
   {path:'rant/:id',component:RantDetailsComponent},
@@ -34,7 +35,8 @@ const appRoutes:Routes=[
     AppRoutingModule,
     RouterModule.forRoot(appRoutes),
     FocusModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [LoaderService ,LoginService, DevRantApiService ],
   bootstrap: [AppComponent]
