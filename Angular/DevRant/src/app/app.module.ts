@@ -17,6 +17,7 @@ import { DevRantApiService } from './Service/devrant_api';
 import { HttpClientModule } from '@angular/common/http';
 import { StorageServiceModule} from 'angular-webstorage-service';
 import { HeaderService } from './header/header.service';
+import { LocalStorage } from './common/local-storage';
 
 const appRoutes:Routes=[
   {path:'rant/:id',component:RantDetailsComponent},
@@ -41,7 +42,7 @@ const appRoutes:Routes=[
     HttpClientModule,
     StorageServiceModule
   ],
-  providers: [LoaderService ,LoginService, DevRantApiService ,HeaderService ],
+  providers: [LoaderService ,LoginService, DevRantApiService ,HeaderService, LocalStorage ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

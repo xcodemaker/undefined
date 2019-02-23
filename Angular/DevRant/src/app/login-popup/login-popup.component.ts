@@ -4,8 +4,8 @@ import { LoaderService } from '../loader/loader.service';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 import ERROR_MESSAGES from '../common/Constants'
 import { DevRantApiService } from '../Service/devrant_api';
-import {LOCAL_STORAGE, WebStorageService} from 'angular-webstorage-service';
 import { HeaderService } from '../header/header.service';
+import { LocalStorage } from '../common/local-storage';
 
 @Component({
   selector: 'app-login-popup',
@@ -27,7 +27,7 @@ export class LoginPopupComponent implements OnInit   {
   loginInput: any = {};
   loginFaild:boolean=false;
   //LoaderService is for the spinner
-  constructor(private headerService:HeaderService, @Inject(LOCAL_STORAGE) private storage: WebStorageService,private loginService: LoginService ,private renderer: Renderer2,private loaderService:LoaderService,private fb: FormBuilder,private devrantApi:DevRantApiService) {
+  constructor(private headerService:HeaderService,  private storage: LocalStorage,private loginService: LoginService ,private renderer: Renderer2,private loaderService:LoaderService,private fb: FormBuilder,private devrantApi:DevRantApiService) {
     this.createForm();
     this.name_error=ERROR_MESSAGES.LOGIN_USERNAME_EMPTY;
     this.password_error=ERROR_MESSAGES.LOGIN_PASSWORD_EMPTY;
@@ -68,9 +68,9 @@ export class LoginPopupComponent implements OnInit   {
       console.log(data);
       if(data.ok){
         this.loginFaild=false;
-        this.storage.set("login", true);
-        this.storage.set("token", data.token);
-        this.storage.set("username", data.username);
+        this.storage.storeDate("login", true);
+        this.storage.storeDate("token", data.token);
+        this.storage.storeDate("username", data.username);
         this.loginService.display(false);
         this.headerService.login(true);
       }else{
