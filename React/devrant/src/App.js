@@ -14,6 +14,8 @@ import Login from "./components/Login";
 import * as commonMethods from './common/commonMethods';
 import * as ajaxServices from "./common/ajaxServices";
 import {API_URLS, ERROR_MESSAGES} from "./common/commonVarList";
+import PubSub from 'pubsub-js'
+
 
 class App extends Component {
     constructor(props){

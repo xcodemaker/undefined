@@ -5,8 +5,10 @@
 
 import React, {Component} from 'react';
 import * as ajaxServices from "../common/ajaxServices";
-import {API_URLS, ERROR_MESSAGES} from "../common/commonVarList";
+import {API_URLS, ERROR_MESSAGES, PUBSUB_TOPICS} from "../common/commonVarList";
 import * as commonMethods from "../common/commonMethods";
+import PubSub from 'pubsub-js'
+
 
 class Rant extends Component {
     constructor(props){
@@ -24,6 +26,7 @@ class Rant extends Component {
                 "commentCount": 0
             }
         }
+
     }
     componentWillReceiveProps(nextProps, nextContext) {
         this.setState({
@@ -34,16 +37,20 @@ class Rant extends Component {
     vote(action){
         let auth = commonMethods.getAuthData()
         if(auth.token && auth.token !== ''){
+            if((action == 'up' && this.state.rant.myVote==1) || (action == 'down' && this.state.rant.myVote==-1)){
+               action = 'reset'
+            }
             ajaxServices.post(API_URLS.VOTE, {
                 "postId": this.state.rant.id,
                 "direction": action
             }).then((data)=>{
-                console.log(data)
-                if(data.ok){
-                    this.setState({
-                        rant : data.post
-                    })
-                }
+                // if(data.ok){
+                //     this.setState({
+                //         rant : data.post
+                //     })
+                // }
+                PubSub.publish(PUBSUB_TOPICS.REFRESH_RANT_LIST, '');
+
             }).catch((err)=>{
                 console.error(err)
             })

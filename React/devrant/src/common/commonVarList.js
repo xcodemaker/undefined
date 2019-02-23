@@ -18,8 +18,13 @@ const API_URLS = {
     VOTE : 'https://api.devrant.thusitha.site/v1/post.vote'
 }
 
+const PUBSUB_TOPICS = {
+    REFRESH_RANT_LIST : 'REFRESH_RANT_LIST'
+}
+
 export {
     // CONSTANTS,
     ERROR_MESSAGES,
-    API_URLS
+    API_URLS,
+    PUBSUB_TOPICS
 }
