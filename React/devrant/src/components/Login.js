@@ -6,6 +6,7 @@
 import React, {Component} from 'react';
 import Loader from "./Loader";
 import {ERROR_MESSAGES} from '../common/commonVarList';
+import * as ajaxServices from '../common/ajaxServices';
 
 class Login extends Component {
 
