@@ -13,7 +13,7 @@ import RantDetails from "./components/RantDetails";
 import Login from "./components/Login";
 import * as commonMethods from './common/commonMethods';
 import * as ajaxServices from "./common/ajaxServices";
-import {API_URLS, ERROR_MESSAGES} from "./common/commonVarList";
+import {API_URLS, ERROR_MESSAGES, PUBSUB_TOPICS} from "./common/commonVarList";
 import PubSub from 'pubsub-js'
 import Alert from "./components/Alert";
 
@@ -25,12 +25,30 @@ class App extends Component {
             isLoginPopupOpen : false,
             isLoggedIn : false,
             username : '',
-            token : ''
+            token : '',
+            alertTitle:'',
+            alertDescription:'',
+            alertShow:false
         }
         this.showHideLogin = this.showHideLogin.bind(this)
         this.loginSuccessCallback = this.loginSuccessCallback.bind(this)
         this.signOut = this.signOut.bind(this)
+        this.mySubscriber = this.mySubscriber.bind(this)
+        let token = PubSub.subscribe(PUBSUB_TOPICS.ALERT, this.mySubscriber);
+
+
     }
+
+    mySubscriber(msg, data) {
+        if(msg === PUBSUB_TOPICS.ALERT){
+            console.log("lol")
+            this.setState({
+                alertTitle:data.title,
+                alertDescription:data.description,
+                alertShow:data.show
+            })
+        }
+    };
 
     showHideLogin(show){
         this.setState({
@@ -288,7 +306,7 @@ class App extends Component {
                {/* Start of alert popup */}
                {/* ======================= */}
 
-               <Alert title='Test Title' description="Test Description" show={true}/>
+               <Alert title={this.state.alertTitle} description={this.state.alertDescription} show={this.state.alertShow}/>
 
                {/* ======================= */}
                {/* End of alert popup */}

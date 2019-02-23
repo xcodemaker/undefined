@@ -5,9 +5,10 @@
 
 import React, {Component} from 'react';
 import * as ajaxServices from "../common/ajaxServices";
-import {API_URLS, ERROR_MESSAGES, PUBSUB_TOPICS} from "../common/commonVarList";
+import {API_URLS, ERROR_MESSAGES, PUBSUB_TOPICS, API_ERROR_MESSAGES} from "../common/commonVarList";
 import * as commonMethods from "../common/commonMethods";
 import PubSub from 'pubsub-js'
+import Alert from "./Alert";
 
 
 class Rant extends Component {
@@ -25,6 +26,7 @@ class Rant extends Component {
                 "myVote": 0,
                 "commentCount": 0
             }
+
         }
 
     }
@@ -49,7 +51,11 @@ class Rant extends Component {
                 //         rant : data.post
                 //     })
                 // }
-                PubSub.publish(PUBSUB_TOPICS.REFRESH_RANT_LIST, '');
+                if(!data.ok){
+                    console.log(API_ERROR_MESSAGES[data.error])
+                    PubSub.publish(PUBSUB_TOPICS.ALERT, {title:'Error', description:API_ERROR_MESSAGES[data.error], show:true})
+                }
+                PubSub.publish(PUBSUB_TOPICS.REFRESH_RANT_LIST, '')
 
             }).catch((err)=>{
                 console.error(err)
