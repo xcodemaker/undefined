@@ -11,6 +11,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { RantDetailsComponent } from './rant-details/rant-details.component';
 import { LoginPopupComponent } from './login-popup/login-popup.component';
 import { LoginService } from './login-popup/login-popup.service';
+import {FocusModule} from 'angular2-focus';
 
 const appRoutes:Routes=[
   {path:'rant/:id',component:RantDetailsComponent},
@@ -29,7 +30,8 @@ const appRoutes:Routes=[
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    FocusModule.forRoot()
   ],
   providers: [LoaderService ,LoginService ],
   bootstrap: [AppComponent]
