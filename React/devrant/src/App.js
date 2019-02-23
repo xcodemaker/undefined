@@ -288,7 +288,7 @@ class App extends Component {
                {/* Start of alert popup */}
                {/* ======================= */}
 
-               <Alert title='Test Title' description="Test Description"/>
+               <Alert title='Test Title' description="Test Description" show={true}/>
 
                {/* ======================= */}
                {/* End of alert popup */}
