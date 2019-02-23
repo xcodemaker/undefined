@@ -4,6 +4,7 @@
  */
 
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom'
 import * as ajaxServices from "../common/ajaxServices";
 import {API_URLS, ERROR_MESSAGES, PUBSUB_TOPICS, API_ERROR_MESSAGES} from "../common/commonVarList";
 import * as commonMethods from "../common/commonMethods";
@@ -71,7 +72,7 @@ class Rant extends Component {
         let rant = this.state.rant;
 
         return (
-            <article className="post">
+            <Link className="post" to={'/rant/'+this.state.rant.id} >
                 <div className="post__inner">
                     <div className="score">
                         <div className={`score__up layout--center ${rant.myVote==1?'checked':''}`} onClick={()=>{this.vote('up')}}>++</div>
@@ -94,7 +95,7 @@ class Rant extends Component {
                         {rant.commentCount}
                     </div>
                 </div>
-            </article>
+            </Link>
         )
     }
 }
