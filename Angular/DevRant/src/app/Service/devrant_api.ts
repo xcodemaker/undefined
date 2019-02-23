@@ -7,7 +7,7 @@ import { LocalStorage } from "../common/local-storage";
   providedIn: "root"
 })
 export class DevRantApiService {
-  x_token: any="";
+  x_token: any = "";
 
   constructor(private http: HttpClient, private storage: LocalStorage) {
     if (storage.getStorageData("login") != null) {
@@ -36,11 +36,7 @@ export class DevRantApiService {
       "X-Token": this.x_token
     });
     let options = { headers: headers };
-    return this.http.post(
-      CONST.USER_DEACTIVATE,
-      {},
-      options
-    );
+    return this.http.post(CONST.USER_DEACTIVATE, {}, options);
   }
 
   getAllPost() {
@@ -49,17 +45,32 @@ export class DevRantApiService {
       "X-Token": this.x_token
     });
     let options = { headers: headers };
-    return this.http.get(
-      CONST.GET_POST_LIST,
+    return this.http.get(CONST.GET_POST_LIST, options);
+  }
+
+  upVote(id: any) {
+    let headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      "X-Token": this.x_token
+    });
+    let options = { headers: headers };
+    return this.http.post(
+      CONST.VOTE,
+      { postId: id, direction: "up" },
       options
     );
   }
 
-  //   initArticles(){
-  //    return this.http.get('https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey='+this.api_key);
-  //   }
-
-  //   getArticlesByID(source: String){
-  //    return this.http.get('https://newsapi.org/v2/top-headlines?sources='+source+'&apiKey='+this.api_key);
-  //   }
+  downVote(id: any) {
+    let headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      "X-Token": this.x_token
+    });
+    let options = { headers: headers };
+    return this.http.post(
+      CONST.VOTE,
+      { postId: id, direction: "down" },
+      options
+    );
+  }
 }
