@@ -12,6 +12,7 @@ import { RantDetailsComponent } from './rant-details/rant-details.component';
 import { LoginPopupComponent } from './login-popup/login-popup.component';
 import { LoginService } from './login-popup/login-popup.service';
 import {FocusModule} from 'angular2-focus';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const appRoutes:Routes=[
   {path:'rant/:id',component:RantDetailsComponent},
@@ -31,7 +32,8 @@ const appRoutes:Routes=[
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot(appRoutes),
-    FocusModule.forRoot()
+    FocusModule.forRoot(),
+    ReactiveFormsModule
   ],
   providers: [LoaderService ,LoginService ],
   bootstrap: [AppComponent]
