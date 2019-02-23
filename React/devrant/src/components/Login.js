@@ -17,8 +17,7 @@ class Login extends Component {
     hideLogin(){
         this.props.showHideLogin(false)
     }
-
-
+    
     render() {
         return (
             <div className={`popup ${this.props.isOpen?'popup--open':''}`}>
