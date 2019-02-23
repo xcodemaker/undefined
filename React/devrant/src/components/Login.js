@@ -14,10 +14,16 @@ class Login extends Component {
         this.hideLogin = this.hideLogin.bind(this)
     }
 
+    componentWillReceiveProps(nextProps, nextContext) {
+        if (nextProps.isOpen) {
+            this.refs.login_username.focus()
+        }
+    }
+
     hideLogin(){
         this.props.showHideLogin(false)
     }
-    
+
     render() {
         return (
             <div className={`popup ${this.props.isOpen?'popup--open':''}`}>
@@ -39,8 +45,8 @@ class Login extends Component {
                            <form name="login">
                                <div className="login">
 
-                                   <input type="text" placeholder="USERNAME" />
-                                   <input type="password" placeholder="PASSWORD" />
+                                   <input ref="login_username" type="text" placeholder="USERNAME"/>
+                                   <input ref="login_password" type="password" placeholder="PASSWORD" />
 
                                    <Loader/>
 
