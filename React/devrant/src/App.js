@@ -7,7 +7,7 @@ import React, {Component} from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from './components/Header'
 import './App.css';
-import Loader from "./components/Spinner";
+import Loader from "./components/Loader";
 import RantList from "./components/RantList";
 import RantDetails from "./components/RantDetails";
 import Login from "./components/Login";
@@ -51,7 +51,7 @@ class App extends Component {
                            {/*/!* Start of Loader *!/*/}
                            {/*/!* ======================= *!/*/}
 
-                            <Loader/>
+                            <Loader isLoading={true}/>
 
                            {/*/!* ======================= *!/*/}
                            {/*/!* End of loader *!/*/}
