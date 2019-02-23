@@ -10,6 +10,7 @@ import {API_URLS, ERROR_MESSAGES, PUBSUB_TOPICS, API_ERROR_MESSAGES} from "../co
 import * as commonMethods from "../common/commonMethods";
 import PubSub from 'pubsub-js'
 import Alert from "./Alert";
+import Score from "./Score";
 
 
 class Rant extends Component {
@@ -30,40 +31,11 @@ class Rant extends Component {
         }
 
     }
+
     componentWillReceiveProps(nextProps, nextContext) {
         this.setState({
             rant : nextProps.rant
         })
-    }
-
-    vote(action){
-        let auth = commonMethods.getAuthData()
-        if(auth.token && auth.token !== ''){
-            if((action == 'up' && this.state.rant.myVote==1) || (action == 'down' && this.state.rant.myVote==-1)){
-               action = 'reset'
-            }
-            ajaxServices.post(API_URLS.VOTE, {
-                "postId": this.state.rant.id,
-                "direction": action
-            }).then((data)=>{
-                // if(data.ok){
-                //     this.setState({
-                //         rant : data.post
-                //     })
-                // }
-                if(!data.ok){
-                    console.log(API_ERROR_MESSAGES[data.error])
-                    PubSub.publish(PUBSUB_TOPICS.ALERT, {title:'Error', description:API_ERROR_MESSAGES[data.error], show:true})
-                }
-                PubSub.publish(PUBSUB_TOPICS.REFRESH_RANT_LIST, '')
-
-            }).catch((err)=>{
-                console.error(err)
-            })
-        }else{
-            this.props.showHideLogin(true)
-        }
-
     }
 
 
@@ -71,13 +43,9 @@ class Rant extends Component {
         let rant = this.state.rant;
 
         return (
-            <Link className="post" to={'/rant/'+this.state.rant.id} >
+            <Link className="post" to={'/rant/'+rant.id} >
                 <div className="post__inner">
-                    <div className="score">
-                        <div className={`score__up layout--center ${rant.myVote==1?'checked':''}`} onClick={(e)=>{e.preventDefault(); this.vote('up')}}>++</div>
-                        <div className="score__board layout--center">{rant.votes}</div>
-                        <div className={`score__down layout--center ${rant.myVote==-1?'checked':''}`} onClick={(e)=>{e.preventDefault(); this.vote('down')}}>--</div>
-                    </div>
+                    <Score rant={rant} showHideLogin={this.props.showHideLogin}/>
                     <div className="post__body">
                         {rant.content}
                     </div>
