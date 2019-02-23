@@ -37,7 +37,7 @@ export class DevRantApiService {
     });
     let options = { headers: headers };
     return this.http.post(
-      CONST.USER_ACTIVATE,
+      CONST.USER_DEACTIVATE,
       {},
       options
     );
