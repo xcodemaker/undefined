@@ -6,7 +6,33 @@
 import React, {Component} from 'react';
 
 class Comment extends Component {
+
+    constructor(props){
+        super(props)
+        this.state = {
+            comment : {
+                "comment": "",
+                "id": "",
+                "timestamp": 0,
+                "author": "",
+                "isMyComment": false,
+                "displayTime": ""
+            },
+            rantId : ''
+        }
+
+    }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        this.setState({
+            comment : nextProps.comment,
+            rantId : nextProps.rantId
+        })
+    }
+
     render() {
+        let comment = this.state.comment
+
         return (
             <section className="comment">
                 <div className="comment__inner">
@@ -18,18 +44,18 @@ class Comment extends Component {
                                 </svg>
                             </div>
                             <div className="profile__name">
-                                Elon
+                                {comment.author}
                             </div>
                         </div>
                         <div className="post__details">
-                            Lorem ipsum
+                            {comment.comment}
                             <br/>
                         </div>
                     </div>
                 </div>
                 <div className="comment__footer">
-                    <div className="comment__delete">DELETE</div>
-                    <div className="comment__time">2m ago</div>
+                    {comment.isMyComment && <div className="comment__delete">DELETE</div>}
+                    <div className="comment__time">{comment.displayTime}</div>
                 </div>
             </section>
         )
