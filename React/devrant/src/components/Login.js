@@ -4,7 +4,7 @@
  */
 
 import React, {Component} from 'react';
-import Loader from "./Spinner";
+import Loader from "./Loader";
 
 class Login extends Component {
 
@@ -48,7 +48,7 @@ class Login extends Component {
                                    <input ref="login_username" type="text" placeholder="USERNAME"/>
                                    <input ref="login_password" type="password" placeholder="PASSWORD" />
 
-                                   <Loader/>
+                                   <Loader isLoading={true}/>
 
                                    <div className="form__error">
                                        Some fields are missing !

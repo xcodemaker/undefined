@@ -13,6 +13,12 @@ class Loader extends Component {
         }
     }
 
+    componentWillReceiveProps(nextProps, nextContext) {
+        this.setState({
+            isLoading : nextProps.isLoading
+        })
+    }
+
     render() {
         return (
             <div className="loader">
