@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { LoginService } from '../login-popup/login-popup.service';
 import { HeaderService } from './header.service';
 import { WebStorageService, LOCAL_STORAGE } from 'angular-webstorage-service';
+import { LocalStorage } from '../common/local-storage';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,7 @@ import { WebStorageService, LOCAL_STORAGE } from 'angular-webstorage-service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(@Inject(LOCAL_STORAGE) private storage: WebStorageService,private loginServic: LoginService,private headerService:HeaderService) { }
+  constructor( private storage: LocalStorage,private loginServic: LoginService,private headerService:HeaderService) { }
 
 
   login: boolean=false;
@@ -23,7 +24,7 @@ export class HeaderComponent implements OnInit {
       this.login = val;
       this.logout = !val;
       if(this.login){
-        this.username=this.storage.get('username');
+        this.username=this.storage.getStorageData('username');
       }
     });
   }
