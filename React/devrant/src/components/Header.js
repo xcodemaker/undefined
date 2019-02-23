@@ -1,3 +1,8 @@
+/**
+ * Author : Nadun Chamikara
+ * Date : 2019/02/23
+ */
+
 import React, {Component} from 'react';
 
 class Header extends Component{

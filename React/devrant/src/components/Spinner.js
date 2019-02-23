@@ -1,11 +1,22 @@
+/**
+ * Author : Nadun Chamikara
+ * Date : 2019/02/23
+ */
+
 import React, {Component} from 'react';
 
 class Loader extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            isLoading: true
+        }
+    }
 
     render() {
         return (
             <div class="loader">
-                <div class="spinner"></div>
+                {this.state.isLoading && <div className="spinner"></div>}
             </div>
         )
     }

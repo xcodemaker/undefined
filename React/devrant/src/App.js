@@ -1,4 +1,9 @@
 import React, {Component} from 'react';
+/**
+ * Author : Nadun Chamikara
+ * Date : 2019/02/23
+ */
+
 import Header from './components/Header'
 import './App.css';
 import Loader from "./components/Spinner";
