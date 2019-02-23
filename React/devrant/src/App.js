@@ -1,12 +1,15 @@
-import React, {Component} from 'react';
 /**
  * Author : Nadun Chamikara
  * Date : 2019/02/23
  */
 
+import React, {Component} from 'react';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from './components/Header'
 import './App.css';
 import Loader from "./components/Spinner";
+import RantList from "./components/RantList";
+import RantDetails from "./components/RantDetails";
 
 class App extends Component {
     render() {
@@ -14,7 +17,7 @@ class App extends Component {
            <div>
 
 
-               <div class="page">
+               <div className="page">
 
                     {/*Start of Header */}
                     {/*======================= */}
@@ -38,6 +41,13 @@ class App extends Component {
                            {/*/!* ======================= *!/*/}
                            {/*/!* End of loader *!/*/}
 
+
+                   <Router>
+                           <Switch>
+                               <Route exact path='/' component={RantList}/>
+                               <Route path='/rant/:rantid' component={RantDetails}/>
+                           </Switch>
+                   </Router>
 
                            {/*/!* Start of Rant List Page *!/*/}
                            {/*/!* ======================= *!/*/}
