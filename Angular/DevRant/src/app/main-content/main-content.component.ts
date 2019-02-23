@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoaderService } from '../loader/loader.service';
 import { delay, async } from 'q';
+import { LoginService } from '../login-popup/login-popup.service';
 
 @Component({
   selector: 'app-main-content',
@@ -9,11 +10,14 @@ import { delay, async } from 'q';
 })
 export class MainContentComponent implements OnInit {
 
-  constructor(private loaderService: LoaderService) { }
+  constructor(private loaderService: LoaderService,private loginServic: LoginService) { }
   async  delayLoader() {
     await delay(3000);
 
      this.loaderService.display(false);
+     this.loginServic.display(true);
+     await delay(3000);
+     this.loginServic.display(false);
   }
 
   async  delay(ms: number) {

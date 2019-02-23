@@ -10,6 +10,7 @@ import { LoaderService } from './loader/loader.service';
 import { Routes, RouterModule } from '@angular/router';
 import { RantDetailsComponent } from './rant-details/rant-details.component';
 import { LoginPopupComponent } from './login-popup/login-popup.component';
+import { LoginService } from './login-popup/login-popup.service';
 
 const appRoutes:Routes=[
   {path:'rant/:id',component:RantDetailsComponent},
@@ -30,7 +31,7 @@ const appRoutes:Routes=[
     AppRoutingModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [LoaderService ],
+  providers: [LoaderService ,LoginService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
