@@ -6,12 +6,25 @@
 import React, {Component} from 'react';
 import Loader from "./Loader";
 
+const ERR_MSG_USERNAME_EMPTY = 'Username is required !'
+const ERR_MSG_USERNAME_INVALID = 'Username is invalid !'
+const ERR_MSG_PASSWORD_EMPTY = 'Password is required !'
+
 class Login extends Component {
+
 
     constructor(props){
         super(props)
-        this.state = {}
+        this.state = {
+            hasErr : false,
+            errMsg : '',
+            isLoading : false,
+        }
+
         this.hideLogin = this.hideLogin.bind(this)
+        this.handleLogin = this.handleLogin.bind(this)
+        this.hideError = this.hideError.bind(this)
+
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
@@ -23,6 +36,55 @@ class Login extends Component {
     hideLogin(){
         this.props.showHideLogin(false)
     }
+
+    hideError(){
+        this.setState({
+            hasErr: false,
+            errMsg : ''
+        })
+    }
+
+
+    handleLogin(e){
+        e.preventDefault();
+        let isValid = true
+
+        let usernameField = this.refs.login_username
+        let passwordField = this.refs.login_password
+
+        let username = usernameField.value
+        let password = passwordField.value
+
+
+        if(username == ''){
+            isValid = false
+            this.setState({
+                hasErr: true,
+                errMsg : ERR_MSG_USERNAME_EMPTY
+            })
+            usernameField.focus()
+        }else if(!username.match(/^[a-z0-9]+$/i)){
+            isValid = false
+            this.setState({
+                hasErr: true,
+                errMsg : ERR_MSG_USERNAME_INVALID
+            })
+            usernameField.focus()
+        }else if(password == ''){
+            isValid = false
+            this.setState({
+                hasErr: true,
+                errMsg : ERR_MSG_PASSWORD_EMPTY
+            })
+            passwordField.focus()
+        }
+
+        if(isValid){
+            console.log("ALl valid")
+        }
+    }
+
+
 
     render() {
         return (
@@ -42,19 +104,21 @@ class Login extends Component {
                            <div className="form__description">
                                Vote and comment on others' rants. Post your own.
                            </div>
-                           <form name="login">
+                           <form name="login" onSubmit={this.handleLogin}>
                                <div className="login">
+                                   <input ref="login_username" type="text" placeholder="USERNAME" onBlur={this.hideError}/>
+                                   <input ref="login_password" type="password" placeholder="PASSWORD" onBlur={this.hideError}/>
 
-                                   <input ref="login_username" type="text" placeholder="USERNAME"/>
-                                   <input ref="login_password" type="password" placeholder="PASSWORD" />
+                                   <Loader isLoading={this.state.isLoading}/>
 
-                                   <Loader isLoading={true}/>
 
-                                   <div className="form__error">
-                                       Some fields are missing !
-                                   </div>
+                                   {this.state.hasErr &&
+                                       <div className="form__error">
+                                           {this.state.errMsg}
+                                       </div>
+                                   }
 
-                                   <input type="submit" value="LET ME IN" />
+                                   <input type="submit" value="LET ME IN"/>
                                </div>
                            </form>
                        </div>
