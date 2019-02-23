@@ -4,14 +4,26 @@
  */
 
 import React, {Component} from 'react';
+import Loader from "./Loader";
+import PubSub from "pubsub-js";
+import {PUBSUB_TOPICS} from "../common/commonVarList";
 
 class RantDetails extends Component {
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLoading: true
+        }
+    }
+    
     render() {
         let rantId = this.props.match.params.rantid;
-        
+
         return (
-            <div className="rant-details layout--center">
+            <div>
+                <Loader isLoading={this.state.isLoading}/>
+
+                <div className="rant-details layout--center">
 
                 <section className="post-hero">
                     <div className="post-hero__inner">
@@ -83,7 +95,7 @@ class RantDetails extends Component {
                 </div>
 
             </div>
-
+            </div>
         )
     }
 }
