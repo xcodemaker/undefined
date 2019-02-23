@@ -7,7 +7,7 @@ import { LocalStorage } from "../common/local-storage";
   providedIn: "root"
 })
 export class DevRantApiService {
-  x_token: any;
+  x_token: any="";
 
   constructor(private http: HttpClient, private storage: LocalStorage) {
     if (storage.getStorageData("login") != null) {
@@ -39,6 +39,18 @@ export class DevRantApiService {
     return this.http.post(
       CONST.USER_DEACTIVATE,
       {},
+      options
+    );
+  }
+
+  getAllPost() {
+    let headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      "X-Token": this.x_token
+    });
+    let options = { headers: headers };
+    return this.http.get(
+      CONST.GET_POST_LIST,
       options
     );
   }

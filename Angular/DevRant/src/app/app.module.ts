@@ -18,6 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { StorageServiceModule} from 'angular-webstorage-service';
 import { HeaderService } from './header/header.service';
 import { LocalStorage } from './common/local-storage';
+import { RantListComponent } from './rant-list/rant-list.component';
+import { RantComponent } from './rant/rant.component';
 
 const appRoutes:Routes=[
   {path:'rant/:id',component:RantDetailsComponent},
@@ -31,7 +33,9 @@ const appRoutes:Routes=[
     MainContentComponent,
     LoaderComponent,
     RantDetailsComponent,
-    LoginPopupComponent
+    LoginPopupComponent,
+    RantListComponent,
+    RantComponent
   ],
   imports: [
     BrowserModule,

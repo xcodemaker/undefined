@@ -1,0 +1,13 @@
+<div class="post-list">
+  <!-- Start of Loader -->
+    <!-- ======================= -->
+    <app-loader></app-loader>
+    <!-- ======================= -->
+    <!-- End of loader -->
+  <!-- <app-rant></app-rant> -->
+  <div *ngFor="let post of posts">
+      
+        <app-rant [data]="post"></app-rant>
+    </div>
+  <div class="rant__add" title="Add Rant">+</div>
+</div>

@@ -23,20 +23,20 @@ export class MainContentComponent implements OnInit {
       }
     }
   }
-  async delayLoader() {
-    await delay(3000);
+  // async delayLoader() {
+  //   await delay(3000);
 
-    this.loaderService.display(false);
-  }
+  //   this.loaderService.display(false);
+  // }
 
-  async delay(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
+  // async delay(ms: number) {
+  //   return new Promise(resolve => setTimeout(resolve, ms));
+  // }
 
   ngOnInit() {
     //http call starts
-    this.loaderService.display(true);
-    this.delayLoader();
+    // this.loaderService.display(true);
+    // this.delayLoader();
 
     //http call ends
   }

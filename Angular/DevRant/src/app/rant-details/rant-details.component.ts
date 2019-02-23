@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DevRantApiService } from '../Service/devrant_api';
 
 @Component({
   selector: 'app-rant-details',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RantDetailsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private devrantApi:DevRantApiService,) { }
 
   ngOnInit() {
+  
   }
 
 }
