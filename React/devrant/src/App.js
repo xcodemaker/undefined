@@ -11,19 +11,33 @@ import Loader from "./components/Loader";
 import RantList from "./components/RantList";
 import RantDetails from "./components/RantDetails";
 import Login from "./components/Login";
+import * as commonMethods from './common/commonMethods';
 
 class App extends Component {
     constructor(props){
         super(props)
         this.state = {
-            isLoginPopupOpen : false
+            isLoginPopupOpen : false,
+            isLoggedIn : false,
+            username : '',
+            token : ''
         }
         this.showHideLogin = this.showHideLogin.bind(this)
+        this.loginSuccessCallback = this.loginSuccessCallback.bind(this)
     }
 
     showHideLogin(show){
         this.setState({
             isLoginPopupOpen : show
+        })
+    }
+
+    loginSuccessCallback(){
+        let auth = commonMethods.getAuthData();
+        this.setState({
+            isLoggedIn: true,
+            username:auth.username,
+            token:auth.token
         })
     }
 
@@ -37,7 +51,7 @@ class App extends Component {
                     {/*Start of Header */}
                     {/*======================= */}
 
-                   <Header showHideLogin={this.showHideLogin}/>
+                   <Header showHideLogin={this.showHideLogin} isLoggedIn={this.state.isLoggedIn} username={this.state.username}/>
 
                    {/* ======================= */}
                    {/* End of Header */}
@@ -191,7 +205,7 @@ class App extends Component {
                {/* Start of login popup */}
                {/* ======================= */}
 
-               <Login isOpen={this.state.isLoginPopupOpen} showHideLogin={this.showHideLogin}/>
+               <Login isOpen={this.state.isLoginPopupOpen} showHideLogin={this.showHideLogin} loginSuccessCallback={this.loginSuccessCallback}/>
 
                {/* ======================= */}
                {/* End of login popup */}

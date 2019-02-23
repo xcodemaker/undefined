@@ -7,6 +7,7 @@ import React, {Component} from 'react';
 import Loader from "./Loader";
 import {ERROR_MESSAGES} from '../common/commonVarList';
 import * as ajaxServices from '../common/ajaxServices';
+import * as commonMethods from '../common/commonMethods';
 
 class Login extends Component {
 
@@ -101,6 +102,10 @@ class Login extends Component {
                         hasErr: true,
                         errMsg: ERROR_MESSAGES.LOGIN_RESPONSE_INVALID_CREDENTIALS
                     })
+                }else{
+                    commonMethods.storeAuthData(data.username, data.token)
+                    this.hideLogin()
+                    this.props.loginSuccessCallback()
                 }
 
             }).catch((err)=>{
@@ -136,8 +141,8 @@ class Login extends Component {
                                 if (e.key === "Enter") this.handleLogin(e)
                             }}>
                                 <div className="login">
-                                    <input ref="login_username" type="text" placeholder="USERNAME" onBlur={this.hideError} tabIndex="1" className={this.state.isLoading ? 'hidden':''}/>
-                                    <input ref="login_password" type="text" placeholder="PASSWORD" onBlur={this.hideError} tabIndex="2" className={this.state.isLoading ? 'hidden':''}/>
+                                    <input ref="login_username" type="text" placeholder="USERNAME" onBlur={this.hideError} onKeyUp={this.hideError} tabIndex="1" className={this.state.isLoading ? 'hidden':''}/>
+                                    <input ref="login_password" type="password" placeholder="PASSWORD" onBlur={this.hideError} onKeyUp={this.hideError} tabIndex="2" className={this.state.isLoading ? 'hidden':''}/>
 
                                     <Loader isLoading={this.state.isLoading}/>
 
