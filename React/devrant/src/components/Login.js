@@ -81,6 +81,7 @@ class Login extends Component {
 
         if(isValid){
             console.log("ALl valid")
+            this.hideError()
         }
     }
 
@@ -104,10 +105,10 @@ class Login extends Component {
                            <div className="form__description">
                                Vote and comment on others' rants. Post your own.
                            </div>
-                           <form name="login" onSubmit={this.handleLogin}>
+                           <form name="login" onSubmit={this.handleLogin} onKeyPress={(e)=>{if(e.key=="Enter")this.handleLogin(e)}}>
                                <div className="login">
-                                   <input ref="login_username" type="text" placeholder="USERNAME" onBlur={this.hideError}/>
-                                   <input ref="login_password" type="password" placeholder="PASSWORD" onBlur={this.hideError}/>
+                                   <input ref="login_username" type="text" placeholder="USERNAME" onBlur={this.hideError} tabIndex="1"/>
+                                   <input ref="login_password" type="password" placeholder="PASSWORD" onBlur={this.hideError} tabIndex="2"/>
 
                                    <Loader isLoading={this.state.isLoading}/>
 
@@ -118,7 +119,7 @@ class Login extends Component {
                                        </div>
                                    }
 
-                                   <input type="submit" value="LET ME IN"/>
+                                   <input type="submit" value="LET ME IN" tabIndex="3"/>
                                </div>
                            </form>
                        </div>
