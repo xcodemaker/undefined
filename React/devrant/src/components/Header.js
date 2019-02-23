@@ -13,9 +13,11 @@ class Header extends Component{
         this.showLogin = this.showLogin.bind(this)
     }
 
+
     showLogin(){
         this.props.showHideLogin(true)
     }
+
 
 
     render(){
@@ -29,18 +31,20 @@ class Header extends Component{
                     </div>
 
                     {/*User Profile*/}
-                    {/*<div className="profile layout--center">*/}
-                        {/*<div className="profile__picture">*/}
-                            {/*<svg height="36" width="36">*/}
-                                {/*<circle cx="18" cy="18" r="18" fill="#5c5f6f"></circle>*/}
-                            {/*</svg>*/}
-                        {/*</div>*/}
-                        {/*<div className="profile__name">Elon</div>*/}
-                    {/*</div>*/}
+                    { this.props.isLoggedIn &&
+                    <div className="profile layout--center">
+                        <div className="profile__picture">
+                            <svg height="36" width="36">
+                                <circle cx="18" cy="18" r="18" fill="#5c5f6f"></circle>
+                            </svg>
+                        </div>
+                        <div className="profile__name">{this.props.username}</div>
+                    </div>
+                    }
 
                     <div className="join">
-                         <span onClick={this.showLogin}>Join</span>
-                        {/*<span>Sign Out</span>*/}
+                        { this.props.isLoggedIn || <span onClick={this.showLogin}>Join</span>}
+                        { this.props.isLoggedIn && <span>Sign Out</span>}
                     </div>
                 </div>
             </section>
