@@ -4,34 +4,108 @@
  */
 
 import React, {Component} from 'react';
+import { Redirect } from 'react-router-dom'
 import Loader from "./Loader";
 import PubSub from "pubsub-js";
-import {PUBSUB_TOPICS} from "../common/commonVarList";
+import {API_ERROR_MESSAGES, API_URLS, ERROR_MESSAGES, PUBSUB_TOPICS} from "../common/commonVarList";
+import * as ajaxServices from "../common/ajaxServices";
+import Score from "./Score";
+import CommentsList from "./CommentsList";
 
 class RantDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoading: true
+            isLoading: true,
+            isDeleteSuccess : false,
+            rant:{
+                author: "",
+                comments: [],
+                content: "",
+                displayTime: "",
+                id: "",
+                isMyPost: false,
+                myVote: 0,
+                timestamp: 0,
+                votes: 0
+            }
         }
-    }
-    
-    render() {
-        let rantId = this.props.match.params.rantid;
+        this.rantId = this.props.match.params.id;
+        this.loadRantDetails = this.loadRantDetails.bind(this)
+        this.deleteRant = this.deleteRant.bind(this)
 
+        this.mySubscriber = this.mySubscriber.bind(this)
+        let token = PubSub.subscribe(PUBSUB_TOPICS.REFRESH_RANT_DETAILS, this.mySubscriber);
+    }
+
+    mySubscriber(msg, data) {
+        if (msg === PUBSUB_TOPICS.REFRESH_RANT_DETAILS) {
+            this.loadRantDetails()
+        }
+    };
+
+    loadRantDetails() {
+        ajaxServices.get(API_URLS.RANT_DETAILS, {'postId':this.rantId}).then((data) => {
+            console.log(data)
+            if (data.ok) {
+                this.setState({
+                    rant: data.post
+                })
+            }
+        }).catch((err) => {
+            console.error(err)
+        }).finally(() => {
+            this.setState({
+                isLoading: false
+            })
+        })
+    }
+
+    deleteRant(){
+        let rant = this.state.rant;
+        ajaxServices.deleteMethod(API_URLS.DELETE_RANT, {
+            "postId": rant.id
+        }).then((data)=>{
+            console.log(data)
+            if(!data.ok){
+                this.setState({
+                    hasErr: true,
+                    errMsg: ERROR_MESSAGES.DELETE_RANT_RESPONSE_ERROR
+                })
+                PubSub.publish(PUBSUB_TOPICS.ALERT, {title:'Error', description:API_ERROR_MESSAGES[data.error], show:true})
+            }else{
+                this.setState({
+                    isDeleteSuccess:true
+                })
+                PubSub.publish(PUBSUB_TOPICS.REFRESH_RANT_LIST, '')
+            }
+        }).catch((err)=>{
+            console.error(err)
+        }).finally(()=>{
+            this.setState({
+                isLoading: false
+            })
+        })
+    }
+
+
+    componentDidMount() {
+        this.loadRantDetails()
+    }
+
+    render() {
+        let rant = this.state.rant;
         return (
             <div>
+                {this.state.isDeleteSuccess && <Redirect to='/'/>}
                 <Loader isLoading={this.state.isLoading}/>
 
                 <div className="rant-details layout--center">
 
                 <section className="post-hero">
                     <div className="post-hero__inner">
-                        <div className="score">
-                            <div className="score__up layout--center">++</div>
-                            <div className="score__board layout--center">100</div>
-                            <div className="score__down layout--center">--</div>
-                        </div>
+                        <Score rant={rant} showHideLogin={this.props.showHideLogin}/>
+
                         <div className="post-hero__body">
                             <div className="profile">
                                 <div className="profile__picture">
@@ -40,50 +114,21 @@ class RantDetails extends Component {
                                     </svg>
                                 </div>
                                 <div className="profile__name">
-                                    Elon
+                                    {rant.author}
                                 </div>
                             </div>
                             <div className="post__details">
-                                Lorem ipsum
+                                {rant.content}
                             </div>
                         </div>
                     </div>
                     <div className="post-hero__footer">
-                        <div className="post-hero__delete">DELETE</div>
-                        <div className="post-hero__time">2m ago</div>
+                        {rant.isMyPost && <div className="post-hero__delete" onClick={this.deleteRant}>DELETE</div>}
+                        <div className="post-hero__time">{rant.displayTime}</div>
                     </div>
                 </section>
 
-                <section className="comments layout--center">
-
-                    <h1 className="comments__title"><span>#</span>Comments</h1>
-
-                    <section className="comment">
-                        <div className="comment__inner">
-                            <div className="comment__body">
-                                <div className="profile">
-                                    <div className="profile__picture">
-                                        <svg height="36" width="36">
-                                            <circle cx="18" cy="18" r="18" fill="#5c5f6f"/>
-                                        </svg>
-                                    </div>
-                                    <div className="profile__name">
-                                        Elon
-                                    </div>
-                                </div>
-                                <div className="post__details">
-                                    Lorem ipsum
-                                    <br/>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="comment__footer">
-                            <div className="comment__delete">DELETE</div>
-                            <div className="comment__time">2m ago</div>
-                        </div>
-                    </section>
-
-                </section>
+                <CommentsList  rantId={rant.id} comments={rant.comments}/>
 
                 <div className="rant__comment layout--center" title="Comment">
                     <svg className="icon" viewBox="0 0 31 32" width="100%" height="100%">

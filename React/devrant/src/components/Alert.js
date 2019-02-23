@@ -37,6 +37,7 @@ class Alert extends Component {
         this.setState({
             show:false
         })
+        this.props.closeAlert()
     }
 
     render() {

@@ -4,7 +4,7 @@
  */
 
 import React, {Component} from 'react';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Header from './components/Header'
 import './App.css';
 import Loader from "./components/Loader";
@@ -20,139 +20,153 @@ import PostRant from "./components/PostRant";
 
 
 class App extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
-            isLoginPopupOpen : false,
-            isLoggedIn : false,
-            username : '',
-            token : '',
-            alertTitle:'',
-            alertDescription:'',
-            alertShow:false
+            isLoginPopupOpen: false,
+            isLoggedIn: false,
+            username: '',
+            token: '',
+            alertTitle: '',
+            alertDescription: '',
+            alertShow: false
         }
         this.showHideLogin = this.showHideLogin.bind(this)
         this.loginSuccessCallback = this.loginSuccessCallback.bind(this)
         this.signOut = this.signOut.bind(this)
+        this.closeAlert = this.closeAlert.bind(this)
+
         this.mySubscriber = this.mySubscriber.bind(this)
-        let token = PubSub.subscribe(PUBSUB_TOPICS.ALERT, this.mySubscriber);
-
-
+        PubSub.subscribe(PUBSUB_TOPICS.ALERT, this.mySubscriber);
+        PubSub.subscribe(PUBSUB_TOPICS.SHOW_LOGIN, this.mySubscriber);
     }
 
     mySubscriber(msg, data) {
-        if(msg === PUBSUB_TOPICS.ALERT){
+        if (msg === PUBSUB_TOPICS.ALERT) {
             this.setState({
-                alertTitle:data.title,
-                alertDescription:data.description,
-                alertShow:data.show
+                alertTitle: data.title,
+                alertDescription: data.description,
+                alertShow: data.show
+            })
+        }else if (msg === PUBSUB_TOPICS.SHOW_LOGIN) {
+            this.setState({
+                isLoginPopupOpen: true
             })
         }
     };
 
-    showHideLogin(show){
+    showHideLogin(show) {
         this.setState({
-            isLoginPopupOpen : show
+            isLoginPopupOpen: show
         })
     }
 
-    loginSuccessCallback(){
+    closeAlert(){
+        this.setState({
+            alertTitle: '',
+            alertDescription: '',
+            alertShow: false
+        })
+    }
+    loginSuccessCallback() {
         let auth = commonMethods.getAuthData()
         let isLoggedIn = false
-        if(auth.token && auth.token !== ''){
+        if (auth.token && auth.token !== '') {
             isLoggedIn = true
         }
         this.setState({
             isLoggedIn: isLoggedIn,
-            username:auth.username,
-            token:auth.token
+            username: auth.username,
+            token: auth.token
         })
         PubSub.publish(PUBSUB_TOPICS.REFRESH_RANT_LIST, '')
+        PubSub.publish(PUBSUB_TOPICS.REFRESH_RANT_DETAILS, '')
+
 
     }
 
-    signOut(){
+    signOut() {
         commonMethods.clearLocalStorage()
         this.loginSuccessCallback()
         ajaxServices.post(API_URLS.USER_DEACTIVATE)
     }
 
 
-    componentWillMount(){
-        if(!this.state.isLoggedIn){
+    componentWillMount() {
+        if (!this.state.isLoggedIn) {
             this.loginSuccessCallback()
         }
     }
 
     render() {
         return (
-           <div>
+            <div>
 
 
-               <div className="page">
+                <div className="page">
 
                     {/*Start of Header */}
                     {/*======================= */}
 
-                   <Header showHideLogin={this.showHideLogin} isLoggedIn={this.state.isLoggedIn} username={this.state.username} signOut={this.signOut}/>
+                    <Header showHideLogin={this.showHideLogin} isLoggedIn={this.state.isLoggedIn}
+                            username={this.state.username} signOut={this.signOut}/>
 
-                   {/* ======================= */}
-                   {/* End of Header */}
+                    {/* ======================= */}
+                    {/* End of Header */}
 
-                   {/* Start of Main Section */}
-                   {/* ======================= */}
+                    {/* Start of Main Section */}
+                    {/* ======================= */}
 
-                   <section className="main layout--center">
-                       <div className="main__content layout--wrapped">
+                    <section className="main layout--center">
+                        <div className="main__content layout--wrapped">
 
-                           {/*/!* Start of Loader *!/*/}
-                           {/*/!* ======================= *!/*/}
+                            {/*/!* Start of Loader *!/*/}
+                            {/*/!* ======================= *!/*/}
 
                             {/*<Loader isLoading={true}/>*/}
 
-                           {/*/!* ======================= *!/*/}
-                           {/*/!* End of loader *!/*/}
+                            {/*/!* ======================= *!/*/}
+                            {/*/!* End of loader *!/*/}
 
 
-                   <Router>
-                           <Switch>
-                               <Route exact path='/' render={()=>{return(<RantListPage showHideLogin={this.showHideLogin}/>)}}/>
-                               <Route path='/rant/:rantid' component={RantDetails}/>
-                           </Switch>
-                   </Router>
+                            <Router>
+                                <Switch>
+                                    <Route exact path='/' render={() => {
+                                        return (<RantListPage showHideLogin={this.showHideLogin}/>)
+                                    }}/>
+                                    <Route path='/rant/:id' component={RantDetails}/>
+                                </Switch>
+                            </Router>
 
 
+                        </div>
+                    </section>
+
+                    {/* ======================= */}
+                    {/* End of Main Section */}
+
+                </div>
+
+                {/* Start of login popup */}
+                {/* ======================= */}
+
+                <Login isOpen={this.state.isLoginPopupOpen} showHideLogin={this.showHideLogin}
+                       loginSuccessCallback={this.loginSuccessCallback}/>
+
+                {/* ======================= */}
+                {/* End of login popup */}
+
+                {/* Start of post popup */}
+                {/* ======================= */}
 
 
+                {/* ======================= */}
+                {/* End of post popup */}
 
+                {/* Start of comment popup */}
+                {/* ======================= */}
 
-                       </div>
-                   </section>
-
-                   {/* ======================= */}
-                   {/* End of Main Section */}
-
-               </div>
-
-               {/* Start of login popup */}
-               {/* ======================= */}
-
-               <Login isOpen={this.state.isLoginPopupOpen} showHideLogin={this.showHideLogin} loginSuccessCallback={this.loginSuccessCallback}/>
-
-               {/* ======================= */}
-               {/* End of login popup */}
-
-               {/* Start of post popup */}
-               {/* ======================= */}
-
-
-               {/* ======================= */}
-               {/* End of post popup */}
-
-               {/* Start of comment popup */}
-               {/* ======================= */}
-
-               {/* <div class="popup popup--open">
+                {/* <div class="popup popup--open">
                <div class="popup__header">
                    <div title="Close" class="close layout--center">
                        X
@@ -189,18 +203,19 @@ class App extends Component {
                </div>
            </div> */}
 
-               {/* ======================= */}
-               {/* End of comment popup */}
+                {/* ======================= */}
+                {/* End of comment popup */}
 
-               {/* Start of alert popup */}
-               {/* ======================= */}
+                {/* Start of alert popup */}
+                {/* ======================= */}
 
-               <Alert title={this.state.alertTitle} description={this.state.alertDescription} show={this.state.alertShow}/>
+                <Alert title={this.state.alertTitle} description={this.state.alertDescription}
+                       show={this.state.alertShow} closeAlert={this.closeAlert}/>
 
-               {/* ======================= */}
-               {/* End of alert popup */}
+                {/* ======================= */}
+                {/* End of alert popup */}
 
-           </div>
+            </div>
 
         );
     }

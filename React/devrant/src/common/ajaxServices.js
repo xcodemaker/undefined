@@ -40,6 +40,25 @@ let post = (url, body, params) => {
     })
 }
 
+let deleteMethod = (url, body, params) => {
+    let request = {
+        method:'delete',
+        url:url,
+        params: params,
+        data: body,
+        headers: {'Content-Type': 'application/json'}
+    }
+    setXHeader(request.headers);
+
+    return new Promise((resolve, reject) => {
+        axios(request).then((response) => {
+            resolve(response.data)
+        }).catch((error) => {
+            reject(error)
+        })
+    })
+}
+
 
 let setXHeader = (headers) => {
     let auth = commonMethods.getAuthData()
@@ -50,5 +69,6 @@ let setXHeader = (headers) => {
 
 export {
     get,
-    post
+    post,
+    deleteMethod
 }
