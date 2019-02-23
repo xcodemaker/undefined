@@ -10,6 +10,7 @@ import PubSub from "pubsub-js";
 import {API_ERROR_MESSAGES, API_URLS, ERROR_MESSAGES, PUBSUB_TOPICS} from "../common/commonVarList";
 import * as ajaxServices from "../common/ajaxServices";
 import Score from "./Score";
+import CommentsList from "./CommentsList";
 
 class RantDetails extends Component {
     constructor(props) {
@@ -127,36 +128,7 @@ class RantDetails extends Component {
                     </div>
                 </section>
 
-                <section className="comments layout--center">
-
-                    <h1 className="comments__title"><span>#</span>Comments</h1>
-
-                    <section className="comment">
-                        <div className="comment__inner">
-                            <div className="comment__body">
-                                <div className="profile">
-                                    <div className="profile__picture">
-                                        <svg height="36" width="36">
-                                            <circle cx="18" cy="18" r="18" fill="#5c5f6f"/>
-                                        </svg>
-                                    </div>
-                                    <div className="profile__name">
-                                        Elon
-                                    </div>
-                                </div>
-                                <div className="post__details">
-                                    Lorem ipsum
-                                    <br/>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="comment__footer">
-                            <div className="comment__delete">DELETE</div>
-                            <div className="comment__time">2m ago</div>
-                        </div>
-                    </section>
-
-                </section>
+                <CommentsList  rantId={rant.id} comments={rant.comments}/>
 
                 <div className="rant__comment layout--center" title="Comment">
                     <svg className="icon" viewBox="0 0 31 32" width="100%" height="100%">
