@@ -13,6 +13,20 @@ import RantDetails from "./components/RantDetails";
 import Login from "./components/Login";
 
 class App extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            isLoginPopupOpen : false
+        }
+        this.showHideLogin = this.showHideLogin.bind(this)
+    }
+
+    showHideLogin(show){
+        this.setState({
+            isLoginPopupOpen : show
+        })
+    }
+
     render() {
         return (
            <div>
@@ -23,7 +37,7 @@ class App extends Component {
                     {/*Start of Header */}
                     {/*======================= */}
 
-                   <Header/>
+                   <Header showHideLogin={this.showHideLogin}/>
 
                    {/* ======================= */}
                    {/* End of Header */}
@@ -177,7 +191,7 @@ class App extends Component {
                {/* Start of login popup */}
                {/* ======================= */}
 
-               <Login isOpen={true}/>
+               <Login isOpen={this.state.isLoginPopupOpen} showHideLogin={this.showHideLogin}/>
 
                {/* ======================= */}
                {/* End of login popup */}
