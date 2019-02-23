@@ -14,7 +14,8 @@ const API_URLS = {
     USER_ACTIVATE: 'https://api.devrant.thusitha.site/v1/user.activate',
     USER_DEACTIVATE: 'https://api.devrant.thusitha.site/v1/user.deactivate',
 
-    RANT_LIST : 'https://api.devrant.thusitha.site/v1/post.list'
+    RANT_LIST : 'https://api.devrant.thusitha.site/v1/post.list',
+    VOTE : 'https://api.devrant.thusitha.site/v1/post.vote'
 }
 
 export {

@@ -41,7 +41,7 @@ class RantListPage extends Component {
                 <Loader isLoading={this.state.isLoading}/>
 
                 <div className="post-list">
-                    <RantList rants={this.state.rants}/>
+                    <RantList rants={this.state.rants} showHideLogin={this.props.showHideLogin}/>
                     <div className="rant__add" title="Add Rant">+</div>
                 </div>
             </div>
