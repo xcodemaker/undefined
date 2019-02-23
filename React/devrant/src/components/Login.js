@@ -5,10 +5,7 @@
 
 import React, {Component} from 'react';
 import Loader from "./Loader";
-
-const ERR_MSG_USERNAME_EMPTY = 'Username is required !'
-const ERR_MSG_USERNAME_INVALID = 'Username is invalid !'
-const ERR_MSG_PASSWORD_EMPTY = 'Password is required !'
+import {ERROR_MESSAGES} from '../common/commonVarList';
 
 class Login extends Component {
 
@@ -62,25 +59,25 @@ class Login extends Component {
         let password = passwordField.value
 
 
-        if(username == ''){
+        if(username === ''){
             isValid = false
             this.setState({
                 hasErr: true,
-                errMsg : ERR_MSG_USERNAME_EMPTY
+                errMsg : ERROR_MESSAGES.LOGIN_USERNAME_EMPTY
             })
             usernameField.focus()
         }else if(!username.match(/^[a-z0-9]+$/i)){
             isValid = false
             this.setState({
                 hasErr: true,
-                errMsg : ERR_MSG_USERNAME_INVALID
+                errMsg : ERROR_MESSAGES.LOGIN_USERNAME_INVALID
             })
             usernameField.focus()
-        }else if(password == ''){
+        }else if(password === ''){
             isValid = false
             this.setState({
                 hasErr: true,
-                errMsg : ERR_MSG_PASSWORD_EMPTY
+                errMsg : ERROR_MESSAGES.LOGIN_PASSWORD_EMPTY
             })
             passwordField.focus()
         }
@@ -111,7 +108,7 @@ class Login extends Component {
                            <div className="form__description">
                                Vote and comment on others' rants. Post your own.
                            </div>
-                           <form name="login" onSubmit={this.handleLogin} onKeyPress={(e)=>{if(e.key=="Enter")this.handleLogin(e)}}>
+                           <form name="login" onSubmit={this.handleLogin} onKeyPress={(e)=>{if(e.key==="Enter")this.handleLogin(e)}}>
                                <div className="login">
                                    <input ref="login_username" type="text" placeholder="USERNAME" onBlur={this.hideError} tabIndex="1"/>
                                    <input ref="login_password" type="password" placeholder="PASSWORD" onBlur={this.hideError} tabIndex="2"/>
