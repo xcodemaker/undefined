@@ -13,6 +13,8 @@ const ERROR_MESSAGES = {
     ADD_RANT_RESPONSE_ERROR: 'Failed to add new rant !',
     DELETE_RANT_RESPONSE_ERROR: 'Failed to delete rant !',
 
+    ADD_COMMENT_RANT_BODY_EMPTY: 'Comment content is required !',
+    ADD_COMMENT_RESPONSE_ERROR: 'Failed to add new comment !',
     DELETE_COMMENT_RESPONSE_ERROR: 'Failed to delete comment !',
 
 };
@@ -36,6 +38,7 @@ const API_URLS = {
     ADD_RANT : 'https://api.devrant.thusitha.site/v1/post.add',
     DELETE_RANT : 'https://api.devrant.thusitha.site/v1/post.delete',
 
+    ADD_COMMENT : 'https://api.devrant.thusitha.site/v1/comment.add',
     DELETE_COMMENT : 'https://api.devrant.thusitha.site/v1/comment.delete'
 }
 

@@ -19,6 +19,12 @@ class Loader extends Component {
         })
     }
 
+    componentDidMount() {
+        this.setState({
+            isLoading : this.props.isLoading
+        })
+    }
+
     render() {
         return (
             <div className="loader">
