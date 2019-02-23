@@ -10,36 +10,36 @@ import * as ajaxServices from '../common/ajaxServices';
 import * as commonMethods from '../common/commonMethods';
 import PubSub from "pubsub-js";
 
-class PostRant extends Component {
-
-
+class PostComment extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            rantId:'',
             isLoading: false,
             hasErr :false,
             errMsg : ''
         }
-        this.hideNewRandPopup = this.hideNewRandPopup.bind(this)
+        this.hideNewCommentPopup = this.hideNewCommentPopup.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.hideError = this.hideError.bind(this)
 
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
-        if (nextProps.isOpenNewRant) {
-            this.refs.rant_body.focus()
-            this.refs.rant_body.val = ''
+        if (nextProps.isOpenNewComment) {
+            this.refs.comment_body.focus()
+            this.refs.comment_body.val = ''
             this.setState({
                 hasErr: false,
-                errMsg: ''
+                errMsg: '',
+                rantId : this.props.rantId
             })
         }
     }
 
-    hideNewRandPopup(){
-        this.refs.rant_body.value = ''
-        this.props.showNewRandPopup(false)
+    hideNewCommentPopup(){
+        this.refs.comment_body.value = ''
+        this.props.showNewCommentPopup(false)
     }
 
     hideError() {
@@ -51,32 +51,34 @@ class PostRant extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        let rantField = this.refs.rant_body
-        let rantContent = rantField.value
+        let commentField = this.refs.comment_body
+        let commentContent = commentField.value
 
-        if (rantContent === '') {
+        if (commentContent === '') {
             this.setState({
                 hasErr: true,
-                errMsg: ERROR_MESSAGES.ADD_RANT_RANT_BODY_EMPTY
+                errMsg: ERROR_MESSAGES.ADD_COMMENT_RANT_BODY_EMPTY
             })
-            rantField.focus()
+            commentField.focus()
         }else{
             this.hideError()
             this.setState({
                 isLoading: true
             })
-            ajaxServices.post(API_URLS.ADD_RANT, {
-                "content": rantContent
+
+            ajaxServices.post(API_URLS.ADD_COMMENT, {
+                "postId": this.state.rantId,
+                "comment": commentContent
             }).then((data)=>{
                 console.log(data)
                 if(!data.ok){
                     this.setState({
                         hasErr: true,
-                        errMsg: ERROR_MESSAGES.ADD_RANT_RESPONSE_ERROR
+                        errMsg: ERROR_MESSAGES.ADD_COMMENT_RESPONSE_ERROR
                     })
                 }else{
-                    PubSub.publish(PUBSUB_TOPICS.REFRESH_RANT_LIST, '')
-                    this.hideNewRandPopup()
+                    PubSub.publish(PUBSUB_TOPICS.REFRESH_RANT_DETAILS, '')
+                    this.hideNewCommentPopup()
                 }
 
             }).catch((err)=>{
@@ -89,11 +91,12 @@ class PostRant extends Component {
         }
     }
 
+
     render() {
         return (
-            <div className={`popup ${this.props.isOpenNewRant ? 'popup--open' : ''}`}>
+            <div className={`popup ${this.props.isOpenNewComment ? 'popup--open' : ''}`}>
                <div className="popup__header">
-                   <div title="Close" className="close layout--center" onClick={this.hideNewRandPopup}>
+                   <div title="Close" className="close layout--center" onClick={this.hideNewCommentPopup}>
                        X
                    </div>
                </div>
@@ -102,16 +105,16 @@ class PostRant extends Component {
 
                        <div className="form">
                            <div className="form__title">
-                               NEW <span className="highlight">#</span>RANT
+                               NEW <span className="highlight">#</span>COMMENT
                            </div>
                            <div className="form__description">
-                               Express yourself with 140 characters.
+                               Comment with 140 characters.
                            </div>
-                           <form name="new-rant" onSubmit={this.handleSubmit} onKeyPress={(e) => {
+                           <form name="new-comment" onSubmit={this.handleSubmit} onKeyPress={(e) => {
                                if (e.key === "Enter") this.handleSubmit(e)
                            }}>
-                               <div className="new-rant">
-                                   <textarea ref="rant_body" maxLength="140" onBlur={this.hideError} onKeyUp={this.hideError} tabIndex="1" className={this.state.isLoading ? 'hidden':''} tabIndex={1}></textarea>
+                               <div className="new-comment">
+                                   <textarea ref="comment_body" maxLength="140" onBlur={this.hideError} onKeyUp={this.hideError} tabIndex="1" className={this.state.isLoading ? 'hidden':''} tabIndex={1}></textarea>
 
                                    <Loader isLoading={this.state.isLoading}/>
 
@@ -121,7 +124,7 @@ class PostRant extends Component {
                                    </div>
                                    }
 
-                                   <input type="submit" value="POST" disabled={this.state.isLoading} tabIndex={2}/>
+                                   <input type="submit" value="COMMENT" disabled={this.state.isLoading} tabIndex={2}/>
                                </div>
                            </form>
                        </div>
@@ -133,4 +136,4 @@ class PostRant extends Component {
     }
 }
 
-export default PostRant;
+export default PostComment;
