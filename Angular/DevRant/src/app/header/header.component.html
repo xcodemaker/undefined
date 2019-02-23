@@ -5,18 +5,18 @@
       </div>
 
       <!-- User Profile -->
-      <!-- <div class="profile layout--center">
+      <div class="profile layout--center" *ngIf="login">
           <div class="profile__picture">
               <svg height="36" width="36">
                   <circle cx="18" cy="18" r="18" fill="#5c5f6f"></circle>
               </svg>
           </div>
-          <div class="profile__name">Elon</div>
-      </div> -->
+          <div class="profile__name">{{username}}</div>
+      </div>
 
       <div class="join">
-          <span (click)="openLoginPopup()">Join</span>
-          <!-- <span>Sign Out</span> -->
+          <span (click)="openLoginPopup()" *ngIf="logout">Join</span>
+          <span *ngIf="login">Sign Out</span>
       </div>
   </div>
 </section>

@@ -15,6 +15,8 @@ import {FocusModule} from 'angular2-focus';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DevRantApiService } from './Service/devrant_api';
 import { HttpClientModule } from '@angular/common/http';
+import { StorageServiceModule} from 'angular-webstorage-service';
+import { HeaderService } from './header/header.service';
 
 const appRoutes:Routes=[
   {path:'rant/:id',component:RantDetailsComponent},
@@ -36,9 +38,10 @@ const appRoutes:Routes=[
     RouterModule.forRoot(appRoutes),
     FocusModule.forRoot(),
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    StorageServiceModule
   ],
-  providers: [LoaderService ,LoginService, DevRantApiService ],
+  providers: [LoaderService ,LoginService, DevRantApiService ,HeaderService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
