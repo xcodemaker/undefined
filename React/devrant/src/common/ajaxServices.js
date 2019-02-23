@@ -14,7 +14,7 @@ let get = (url, params) => {
     setXHeader(config.headers)
     return new Promise((resolve, reject) => {
         axios.get(url, config).then((response) => {
-            resolve(response)
+            resolve(response.data)
         }).catch((error) => {
             reject(error)
         })
