@@ -10,6 +10,15 @@ const ERROR_MESSAGES = {
     LOGIN_RESPONSE_INVALID_CREDENTIALS : 'Invalid username or password'
 };
 
+const API_ERROR_MESSAGES = {
+    ACCESS_DENIED:	'Invalid token or no access is granted',
+    MISSING_CONTENT:	'Content is missing in the request body',
+    INVALID_POST_ID:	'Post ID is not valid or not found',
+    MISSING_DIRECTION:	'Vote direction is not available. Available values are up, down and reset',
+    AUTHOR_CANNOT_VOTE:	'Post author can not vote on his/her post',
+    SERVER_ERROR:	'A server side error has been occurred'
+}
+
 const API_URLS = {
     USER_ACTIVATE: 'https://api.devrant.thusitha.site/v1/user.activate',
     USER_DEACTIVATE: 'https://api.devrant.thusitha.site/v1/user.deactivate',
@@ -19,12 +28,14 @@ const API_URLS = {
 }
 
 const PUBSUB_TOPICS = {
-    REFRESH_RANT_LIST : 'REFRESH_RANT_LIST'
+    REFRESH_RANT_LIST : 'REFRESH_RANT_LIST',
+    ALERT : 'ALERT'
 }
 
 export {
     // CONSTANTS,
     ERROR_MESSAGES,
     API_URLS,
-    PUBSUB_TOPICS
+    PUBSUB_TOPICS,
+    API_ERROR_MESSAGES
 }
