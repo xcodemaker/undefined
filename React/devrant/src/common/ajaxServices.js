@@ -20,12 +20,14 @@ let get = (url, params, headers) => {
 
 let post = (url, body, params, headers) => {
     return new Promise((resolve, reject) => {
-        axios.post(url, {
+        axios({
+            method:'post',
+            url:url,
             params: params,
-            body: body,
+            data: body,
             headers:headers
         }).then((response) => {
-            resolve(response);
+            resolve(response.data);
         }).catch((error) => {
             reject(error);
         })

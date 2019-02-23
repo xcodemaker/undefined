@@ -90,12 +90,19 @@ class Login extends Component {
                 isLoading: true
             })
             ajaxServices.post('https://api.devrant.thusitha.site/v1/user.activate', {
-                    "username": "jehan",
-                    "password": "zaq1xsw2!@#$"
+                    "username": username,
+                    "password": password
                 },
                 {},
                 {'Content-Type': 'application/json'}).then((data)=>{
                     console.log(data)
+                if(!data.ok){
+                    this.setState({
+                        hasErr: true,
+                        errMsg: ERROR_MESSAGES.LOGIN_RESPONSE_INVALID_CREDENTIALS
+                    })
+                }
+
             }).catch((err)=>{
                 console.error(err)
             }).finally(()=>{
@@ -130,7 +137,7 @@ class Login extends Component {
                             }}>
                                 <div className="login">
                                     <input ref="login_username" type="text" placeholder="USERNAME" onBlur={this.hideError} tabIndex="1" className={this.state.isLoading ? 'hidden':''}/>
-                                    <input ref="login_password" type="password" placeholder="PASSWORD" onBlur={this.hideError} tabIndex="2" className={this.state.isLoading ? 'hidden':''}/>
+                                    <input ref="login_password" type="text" placeholder="PASSWORD" onBlur={this.hideError} tabIndex="2" className={this.state.isLoading ? 'hidden':''}/>
 
                                     <Loader isLoading={this.state.isLoading}/>
 
