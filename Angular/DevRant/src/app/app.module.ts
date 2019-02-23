@@ -21,6 +21,7 @@ import { LocalStorage } from './common/local-storage';
 import { RantListComponent } from './rant-list/rant-list.component';
 import { RantComponent } from './rant/rant.component';
 import { PostListRefreshService } from './rant-list/rant-list.service';
+import { AlertComponent } from './alert/alert.component';
 
 const appRoutes:Routes=[
   {path:'rant/:id',component:RantDetailsComponent},
@@ -36,7 +37,8 @@ const appRoutes:Routes=[
     RantDetailsComponent,
     LoginPopupComponent,
     RantListComponent,
-    RantComponent
+    RantComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,

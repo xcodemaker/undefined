@@ -1,0 +1,33 @@
+<!-- Start of alert popup -->
+<!-- ======================= -->
+
+<div class="popup popup--open">
+  <div class="popup__header">
+      <div title="Close" class="close layout--center">
+          X
+      </div>
+  </div>
+  <div class="popup__body layout--center">
+      <div class="popup__body-inner">
+
+          <div class="form">
+              <div class="form__title">
+                  <span class="highlight">#</span>{{alertTitle}}!
+              </div>
+              <div class="form__description">
+                  <!-- You can not vote on your own post :) -->
+                  {{alertDescription}}
+              </div>
+              <form name="alert">
+                  <div class="alert">
+                      <input type="submit" value="OK" />
+                  </div>
+              </form>
+          </div>
+
+      </div>
+  </div>
+</div>
+
+<!-- ======================= -->
+<!-- End of alert popup -->
