@@ -20,7 +20,7 @@
           <div class="form__description">
             Vote and comment on others' rants. Post your own.
           </div>
-          <form name="login" [formGroup]="angForm" novalidate>
+          <form name="login" [formGroup]="angForm" novalidate (keyup.enter)="keyDownFunction()">
             <div class="login">
               <div class="form-group loginCustom">
                 <input

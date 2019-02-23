@@ -39,10 +39,23 @@ export class LoginPopupComponent implements OnInit   {
   closeLoginPopup(){
     this.loginService.display(false);
     this.loaderService.display(false);
+    this.angForm.reset();
   }
 
   submitClick(){
     this.loaderService.display(true);
+   
+  }
+
+  keyDownFunction() {
+    // if(event.keyCode == 13) {
+      // console.log(this.angForm.controls['name'].errors.required==null);
+      // if(this.angForm.controls['name'].errors.required==null){
+      //   this.submitClick();
+      // }
+      
+      // rest of your code
+    // }
   }
 
 
