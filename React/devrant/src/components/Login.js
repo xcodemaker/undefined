@@ -5,7 +5,7 @@
 
 import React, {Component} from 'react';
 import Loader from "./Loader";
-import {ERROR_MESSAGES} from '../common/commonVarList';
+import {ERROR_MESSAGES, API_URLS} from '../common/commonVarList';
 import * as ajaxServices from '../common/ajaxServices';
 import * as commonMethods from '../common/commonMethods';
 
@@ -90,7 +90,7 @@ class Login extends Component {
             this.setState({
                 isLoading: true
             })
-            ajaxServices.post('https://api.devrant.thusitha.site/v1/user.activate', {
+            ajaxServices.post(API_URLS.USER_ACTIVATE, {
                     "username": username,
                     "password": password
                 }).then((data)=>{

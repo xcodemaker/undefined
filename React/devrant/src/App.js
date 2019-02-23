@@ -12,6 +12,8 @@ import RantListPage from "./containers/RantListPage";
 import RantDetails from "./components/RantDetails";
 import Login from "./components/Login";
 import * as commonMethods from './common/commonMethods';
+import * as ajaxServices from "./common/ajaxServices";
+import {API_URLS, ERROR_MESSAGES} from "./common/commonVarList";
 
 class App extends Component {
     constructor(props){
@@ -49,6 +51,7 @@ class App extends Component {
     signOut(){
         commonMethods.clearLocalStorage()
         this.loginSuccessCallback()
+        ajaxServices.post(API_URLS.USER_DEACTIVATE)
     }
 
 
