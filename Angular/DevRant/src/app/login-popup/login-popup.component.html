@@ -3,7 +3,7 @@
 <div *ngIf="isOpen">
   <div class="popup popup--open">
     <div class="popup__header">
-      <div title="Close" class="close layout--center">
+      <div title="Close" class="close layout--center" (click)="closeLoginPopup()">
         X
       </div>
     </div>
