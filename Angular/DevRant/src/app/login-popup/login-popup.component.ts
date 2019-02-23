@@ -18,6 +18,8 @@ export class LoginPopupComponent implements OnInit   {
   password_error:any;
   name='';
   password='';
+  isLoading:boolean=false;
+  showInputFeild:boolean=true;
   // userName:any;
   loginInput: any = {};
   //LoaderService is for the spinner
@@ -55,9 +57,13 @@ export class LoginPopupComponent implements OnInit   {
   submitClick(){
     console.log("username :"+this.loginInput.username,"pasword :"+this.loginInput.pass);
     this.loaderService.display(true);
+    this.isLoading=true;
+    this.showInputFeild=false;
     this.devrantApi.userActivate(this.loginInput.username,this.loginInput.pass).subscribe(data => {
       console.log(data);
       this.loaderService.display(false);
+      this.isLoading=false;
+      this.showInputFeild=true;
     });
    
   }
