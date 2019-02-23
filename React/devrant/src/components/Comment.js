@@ -4,6 +4,9 @@
  */
 
 import React, {Component} from 'react';
+import * as ajaxServices from "../common/ajaxServices";
+import {API_ERROR_MESSAGES, API_URLS, ERROR_MESSAGES, PUBSUB_TOPICS} from "../common/commonVarList";
+import PubSub from "pubsub-js";
 
 class Comment extends Component {
 
@@ -21,12 +24,35 @@ class Comment extends Component {
             rantId : ''
         }
 
+        this.deleteComment = this.deleteComment.bind(this)
+
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
         this.setState({
             comment : nextProps.comment,
             rantId : nextProps.rantId
+        })
+    }
+
+    deleteComment(){
+        let comment = this.state.comment;
+        ajaxServices.deleteMethod(API_URLS.DELETE_COMMENT, {
+            "postId": this.state.rantId,
+            "commentId": comment.id
+        }).then((data)=>{
+            console.log(data)
+            if(!data.ok){
+                this.setState({
+                    hasErr: true,
+                    errMsg: ERROR_MESSAGES.DELETE_COMMENT_RESPONSE_ERROR
+                })
+                PubSub.publish(PUBSUB_TOPICS.ALERT, {title:'Error', description:API_ERROR_MESSAGES[data.error], show:true})
+            }else{
+                PubSub.publish(PUBSUB_TOPICS.REFRESH_RANT_DETAILS, '')
+            }
+        }).catch((err)=>{
+            console.error(err)
         })
     }
 
@@ -54,7 +80,7 @@ class Comment extends Component {
                     </div>
                 </div>
                 <div className="comment__footer">
-                    {comment.isMyComment && <div className="comment__delete">DELETE</div>}
+                    {comment.isMyComment && <div className="comment__delete"  onClick={this.deleteComment}>DELETE</div>}
                     <div className="comment__time">{comment.displayTime}</div>
                 </div>
             </section>
