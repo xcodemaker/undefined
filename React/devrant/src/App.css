@@ -563,7 +563,7 @@ html {
   border-color: #1ba749;
 }
 .login input[type=text] {
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
 }
 
 .new-rant,
@@ -650,3 +650,7 @@ html {
     transform: scale(1.02);
   }
 }
+
+
+/* custom css */
+.hidden { display:none; }
