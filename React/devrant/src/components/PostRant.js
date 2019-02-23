@@ -14,7 +14,9 @@ class PostRant extends Component {
 
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = {
+            isLoading: false,
+        }
         this.hideNewRandPopup = this.hideNewRandPopup.bind(this)
 
     }
@@ -51,9 +53,7 @@ class PostRant extends Component {
                                <div className="new-rant">
                                    <textarea ref="rant_body" maxlength="140"></textarea>
 
-                                   <div className="loader">
-                                       <div className="spinner"></div>
-                                   </div>
+                                   <Loader isLoading={this.state.isLoading}/>
 
                                    <div className="form__error">
                                        Some fields are missing !
