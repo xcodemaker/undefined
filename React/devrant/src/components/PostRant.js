@@ -15,14 +15,19 @@ class PostRant extends Component {
     constructor(props) {
         super(props)
         this.state = {}
+        this.hideNewRandPopup = this.hideNewRandPopup.bind(this)
 
+    }
+
+    hideNewRandPopup(){
+        this.props.showNewRandPopup(false)
     }
 
     render() {
         return (
-            <div className="popup popup--open">
+            <div className={`popup ${this.props.isOpenNewRant ? 'popup--open' : ''}`}>
                <div className="popup__header">
-                   <div title="Close" className="close layout--center">
+                   <div title="Close" className="close layout--center" onClick={this.hideNewRandPopup}>
                        X
                    </div>
                </div>

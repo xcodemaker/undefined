@@ -223,7 +223,6 @@ class App extends Component {
                {/* Start of post popup */}
                {/* ======================= */}
 
-               <PostRant/>
 
                {/* ======================= */}
                {/* End of post popup */}
