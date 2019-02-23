@@ -140,7 +140,7 @@ class Login extends Component {
                                     </div>
                                     }
 
-                                    <input type="submit" value="LET ME IN" tabIndex="3"/>
+                                    <input type="submit" value="LET ME IN" tabIndex="3" disabled={this.state.isLoading}/>
                                 </div>
                             </form>
                         </div>
