@@ -52,7 +52,7 @@
               >
                 <div *ngIf="angForm.controls['name'].errors.required">
                   <div class="form__error">
-                    Name is required.
+                    {{name_error}}
                   </div>
                 </div>
               </div>
@@ -65,7 +65,7 @@
               >
                 <div *ngIf="angForm.controls['email'].errors.required">
                   <div class="form__error">
-                    Password is required.
+                      {{password_error}}
                   </div>
                 </div>
               </div>

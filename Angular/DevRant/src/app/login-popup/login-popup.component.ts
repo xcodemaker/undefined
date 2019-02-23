@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, AfterContentInit, AfterViewInit, ElementR
 import { LoginService } from './login-popup.service';
 import { LoaderService } from '../loader/loader.service';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
+import ERROR_MESSAGES from '../common/Constants'
 
 @Component({
   selector: 'app-login-popup',
@@ -12,9 +13,13 @@ export class LoginPopupComponent implements OnInit   {
 
   isOpen: boolean;
   angForm: FormGroup;
+  name_error:any;
+  password_error:any;
   //LoaderService is for the spinner
   constructor(private loginService: LoginService ,private renderer: Renderer2,private loaderService:LoaderService,private fb: FormBuilder) {
     this.createForm();
+    this.name_error=ERROR_MESSAGES.LOGIN_USERNAME_EMPTY;
+    this.password_error=ERROR_MESSAGES.LOGIN_PASSWORD_EMPTY;
    }
 
    createForm() {
