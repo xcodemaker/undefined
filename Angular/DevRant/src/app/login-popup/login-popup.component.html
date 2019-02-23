@@ -23,34 +23,60 @@
           <form name="login" [formGroup]="angForm" novalidate>
             <div class="login">
               <div class="form-group loginCustom">
-                <input type="text" placeholder="USERNAME" focus="true" class="form-control" formControlName="name" />
-              </div>
-              
-              <div class="form-group loginCustom">
-              <input type="password" placeholder="PASSWORD" class="form-control" formControlName="email" />
+                <input
+                  type="text"
+                  placeholder="USERNAME"
+                  focus="true"
+                  class="form-control"
+                  formControlName="name"
+                />
               </div>
 
+              <div class="form-group loginCustom">
+                <input
+                  type="password"
+                  placeholder="PASSWORD"
+                  class="form-control"
+                  formControlName="email"
+                />
+              </div>
 
               <app-loader></app-loader>
 
-              <div *ngIf="angForm.controls['name'].invalid && (angForm.controls['name'].dirty || angForm.controls['name'].touched)" >
-                  <div *ngIf="angForm.controls['name'].errors.required">
-                      <div class="form__error">
+              <div
+                *ngIf="
+                  angForm.controls['name'].invalid &&
+                  (angForm.controls['name'].dirty ||
+                    angForm.controls['name'].touched)
+                "
+              >
+                <div *ngIf="angForm.controls['name'].errors.required">
+                  <div class="form__error">
                     Name is required.
-                      </div>
                   </div>
+                </div>
               </div>
-              <div *ngIf="angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)" >
-                  <div *ngIf="angForm.controls['email'].errors.required">
-                      <div class="form__error">
+              <div
+                *ngIf="
+                  angForm.controls['email'].invalid &&
+                  (angForm.controls['email'].dirty ||
+                    angForm.controls['email'].touched)
+                "
+              >
+                <div *ngIf="angForm.controls['email'].errors.required">
+                  <div class="form__error">
                     Password is required.
-                    </div>
                   </div>
+                </div>
               </div>
               <div class="loginCustom">
-              <input type="button" value="LET ME IN" (click)="submitClick()" [disabled]="angForm.pristine || angForm.invalid" />
+                <input
+                  type="button"
+                  value="LET ME IN"
+                  (click)="submitClick()"
+                  [disabled]="angForm.pristine || angForm.invalid"
+                />
               </div>
-            
             </div>
           </form>
         </div>
