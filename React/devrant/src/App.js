@@ -80,6 +80,8 @@ class App extends Component {
             token: auth.token
         })
         PubSub.publish(PUBSUB_TOPICS.REFRESH_RANT_LIST, '')
+        PubSub.publish(PUBSUB_TOPICS.REFRESH_RANT_DETAILS, '')
+
 
     }
 

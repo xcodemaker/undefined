@@ -28,9 +28,17 @@ class RantDetails extends Component {
             }
         }
         this.rantId = this.props.match.params.id;
-        // this.rantId = "JBkLYn7FunhZVpomLaADrs";
         this.loadRantDetails = this.loadRantDetails.bind(this)
+
+        this.mySubscriber = this.mySubscriber.bind(this)
+        let token = PubSub.subscribe(PUBSUB_TOPICS.REFRESH_RANT_DETAILS, this.mySubscriber);
     }
+
+    mySubscriber(msg, data) {
+        if (msg === PUBSUB_TOPICS.REFRESH_RANT_DETAILS) {
+            this.loadRantDetails()
+        }
+    };
 
     loadRantDetails() {
         ajaxServices.get(API_URLS.RANT_DETAILS, {'postId':this.rantId}).then((data) => {
@@ -82,7 +90,7 @@ class RantDetails extends Component {
                         </div>
                     </div>
                     <div className="post-hero__footer">
-                        <div className="post-hero__delete">DELETE</div>
+                        {rant.isMyPost && <div className="post-hero__delete">DELETE</div>}
                         <div className="post-hero__time">{rant.displayTime}</div>
                     </div>
                 </section>
