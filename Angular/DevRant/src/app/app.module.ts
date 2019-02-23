@@ -9,6 +9,7 @@ import { LoaderComponent } from './loader/loader.component';
 import { LoaderService } from './loader/loader.service';
 import { Routes, RouterModule } from '@angular/router';
 import { RantDetailsComponent } from './rant-details/rant-details.component';
+import { LoginPopupComponent } from './login-popup/login-popup.component';
 
 const appRoutes:Routes=[
   {path:'rant/:id',component:RantDetailsComponent},
@@ -21,7 +22,8 @@ const appRoutes:Routes=[
     HeaderComponent,
     MainContentComponent,
     LoaderComponent,
-    RantDetailsComponent
+    RantDetailsComponent,
+    LoginPopupComponent
   ],
   imports: [
     BrowserModule,
