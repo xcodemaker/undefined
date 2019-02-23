@@ -13,7 +13,8 @@ export class RantListComponent implements OnInit {
 
   // rant:Rant={};
   // rant=new Rant();
-  posts:Post;
+  // posts:Post;
+  // data:{ok:any,posts:any};
 
   constructor(private devrantApi:DevRantApiService,private loaderService:LoaderService) { }
 
@@ -22,30 +23,16 @@ export class RantListComponent implements OnInit {
     this.loaderService.display(true);
     this.devrantApi.getAllPost().subscribe(data => {
       console.log("post list call");
+      // this.data=data;
       if(data.ok){
+
         // console.log(data);
         this.posts=data.posts;
         this.loaderService.display(false);
-        // console.log(this.posts);
-        // this.loginFaild=false;
-        // this.storage.storeDate("login", true);
-        // this.storage.storeDate("token", data.token);
-        // this.storage.storeDate("username", data.username);
-        // this.loginService.display(false);
-        // this.headerService.login(true);
+        
       }else{
-        // this.loginFaild=true;
-        // this.headerService.login(false);
-        // if(data.error=="INVALID_CREDENTIALS"){
-        //   console.log('login faild');
-        //   this.requestError="This can occur for invalid username and password or a wrong password for a given username.";
-        // }else if(data.error=="SERVER_ERROR"){
-        //   this.requestError="A server side error has been occurred.";
-        // }
+      
       }
-      // this.loaderService.display(false);
-      // this.isLoading=false;
-      // this.showInputFeild=true;
     });
   }
 

@@ -8,6 +8,7 @@ const BASE_URL = "https://api.devrant.thusitha.site";
 const USER_ACTIVATE = BASE_URL + "/v1/user.activate";
 const USER_DEACTIVATE = BASE_URL + "/v1/user.deactivate";
 const GET_POST_LIST = BASE_URL + "/v1/post.list";
+const VOTE = BASE_URL + "/v1/post.vote";
 
 export default ERROR_MESSAGES;
-export { USER_ACTIVATE, USER_DEACTIVATE, GET_POST_LIST };
+export { USER_ACTIVATE, USER_DEACTIVATE, GET_POST_LIST, VOTE };
