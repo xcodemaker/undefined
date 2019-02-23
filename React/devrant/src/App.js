@@ -93,7 +93,7 @@ class App extends Component {
 
                    <Router>
                            <Switch>
-                               <Route exact path='/' component={RantListPage}/>
+                               <Route exact path='/' render={()=>{return(<RantListPage showHideLogin={this.showHideLogin}/>)}}/>
                                <Route path='/rant/:rantid' component={RantDetails}/>
                            </Switch>
                    </Router>

@@ -23,7 +23,7 @@ class RantList extends Component {
 
     render() {
         let rants = this.state.rants.map((rant, i)=>{
-            return <Rant rant={rant} key={'rant_'+rant.id}/>
+            return <Rant rant={rant} key={'rant_'+rant.id} showHideLogin={this.props.showHideLogin}/>
         })
         return (
             rants
