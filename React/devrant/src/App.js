@@ -16,6 +16,7 @@ import * as ajaxServices from "./common/ajaxServices";
 import {API_URLS, ERROR_MESSAGES, PUBSUB_TOPICS} from "./common/commonVarList";
 import PubSub from 'pubsub-js'
 import Alert from "./components/Alert";
+import PostRant from "./components/PostRant";
 
 
 class App extends Component {
@@ -67,6 +68,8 @@ class App extends Component {
             username:auth.username,
             token:auth.token
         })
+        PubSub.publish(PUBSUB_TOPICS.REFRESH_RANT_LIST, '')
+
     }
 
     signOut(){
@@ -220,42 +223,7 @@ class App extends Component {
                {/* Start of post popup */}
                {/* ======================= */}
 
-               {/* <div class="popup popup--open">
-               <div class="popup__header">
-                   <div title="Close" class="close layout--center">
-                       X
-                   </div>
-               </div>
-               <div class="popup__body layout--center">
-                   <div class="popup__body-inner">
-
-                       <div class="form">
-                           <div class="form__title">
-                               NEW <span class="highlight">#</span>RANT
-                           </div>
-                           <div class="form__description">
-                               Express yourself with 140 characters.
-                           </div>
-                           <form name="new-rant">
-                               <div class="new-rant">
-                                   <textarea maxlength="140"></textarea>
-
-                                   <div class="loader">
-                                       <div class="spinner"></div>
-                                   </div>
-
-                                   <div class="form__error">
-                                       Some fields are missing !
-                                   </div>
-
-                                   <input type="submit" value="POST">
-                               </div>
-                           </form>
-                       </div>
-
-                   </div>
-               </div>
-           </div> */}
+               <PostRant/>
 
                {/* ======================= */}
                {/* End of post popup */}
