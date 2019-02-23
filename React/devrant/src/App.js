@@ -82,7 +82,7 @@ class App extends Component {
                            {/*/!* Start of Loader *!/*/}
                            {/*/!* ======================= *!/*/}
 
-                            <Loader isLoading={true}/>
+                            {/*<Loader isLoading={true}/>*/}
 
                            {/*/!* ======================= *!/*/}
                            {/*/!* End of loader *!/*/}
