@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, AfterContentInit, AfterViewInit, ElementRef, Renderer2 } from '@angular/core';
 import { LoginService } from './login-popup.service';
 import { LoaderService } from '../loader/loader.service';
+import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-popup',
@@ -10,12 +11,18 @@ import { LoaderService } from '../loader/loader.service';
 export class LoginPopupComponent implements OnInit   {
 
   isOpen: boolean;
+  angForm: FormGroup;
   //LoaderService is for the spinner
-  constructor(private loginService: LoginService ,private renderer: Renderer2,private loaderService:LoaderService) { }
+  constructor(private loginService: LoginService ,private renderer: Renderer2,private loaderService:LoaderService,private fb: FormBuilder) {
+    this.createForm();
+   }
 
-//   @ViewChild('fieldName')
-// fieldName: any;
-// @ViewChild('fieldName') input: ElementRef;
+   createForm() {
+    this.angForm = this.fb.group({
+       name: ['', Validators.required ],
+       email: ['', Validators.required ]
+    });
+  }
 
 
   //for the spinner

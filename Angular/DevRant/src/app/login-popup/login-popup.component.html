@@ -3,7 +3,11 @@
 <div *ngIf="isOpen">
   <div class="popup popup--open">
     <div class="popup__header">
-      <div title="Close" class="close layout--center" (click)="closeLoginPopup()">
+      <div
+        title="Close"
+        class="close layout--center"
+        (click)="closeLoginPopup()"
+      >
         X
       </div>
     </div>
@@ -16,18 +20,63 @@
           <div class="form__description">
             Vote and comment on others' rants. Post your own.
           </div>
-          <form name="login">
+          <form name="login" [formGroup]="angForm" novalidate>
             <div class="login">
-              <input type="text" placeholder="USERNAME"  focus="true" />
-              <input type="password" placeholder="PASSWORD" />
+              <div class="form-group loginCustom">
+                <input
+                  type="text"
+                  placeholder="USERNAME"
+                  focus="true"
+                  class="form-control"
+                  formControlName="name"
+                />
+              </div>
+
+              <div class="form-group loginCustom">
+                <input
+                  type="password"
+                  placeholder="PASSWORD"
+                  class="form-control"
+                  formControlName="email"
+                />
+              </div>
 
               <app-loader></app-loader>
 
-              <div class="form__error">
-                Some fields are missing !
+              <div
+                *ngIf="
+                  angForm.controls['name'].invalid &&
+                  (angForm.controls['name'].dirty ||
+                    angForm.controls['name'].touched)
+                "
+              >
+                <div *ngIf="angForm.controls['name'].errors.required">
+                  <div class="form__error">
+                    Name is required.
+                  </div>
+                </div>
               </div>
-
-              <input type="button" value="LET ME IN" (click)="submitClick()"  />
+              <div
+                *ngIf="
+                  angForm.controls['email'].invalid &&
+                  (angForm.controls['email'].dirty ||
+                    angForm.controls['email'].touched)
+                "
+              >
+                <div *ngIf="angForm.controls['email'].errors.required">
+                  <div class="form__error">
+                    Password is required.
+                  </div>
+                </div>
+              </div>
+              <div class="loginCustom">
+                <input
+                  type="button"
+                  value="LET ME IN"
+                  (click)="submitClick()"
+                  [disabled]="angForm.pristine || angForm.invalid"
+                />
+              </div>
             </div>
           </form>
         </div>

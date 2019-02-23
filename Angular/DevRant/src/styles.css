@@ -570,14 +570,14 @@ html {
   top: 0;
 }
 
-.login {
+.login .loginCustom {
   max-width: 300px;
   display: flex;
   margin: 24px auto;
   flex-direction: column;
 }
-.login input[type=text],
-.login input[type=password] {
+.login  input[type=text],
+.login  input[type=password] {
   background: transparent;
   border: 1px solid gray;
   outline: none;
@@ -589,11 +589,11 @@ html {
   transition: all 0.2s ease-in;
   margin-bottom: 16px;
 }
-.login input[type=text]:focus,
-.login input[type=password]:focus {
+.login  input[type=text]:focus,
+.login  input[type=password]:focus {
   border-color: #1ba749;
 }
-.login input[type=text] {
+.login  input[type=text] {
   text-transform: uppercase;
 }
 
