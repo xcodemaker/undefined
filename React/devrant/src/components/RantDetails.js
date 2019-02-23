@@ -4,9 +4,10 @@
  */
 
 import React, {Component} from 'react';
+import { Redirect } from 'react-router-dom'
 import Loader from "./Loader";
 import PubSub from "pubsub-js";
-import {API_URLS, PUBSUB_TOPICS} from "../common/commonVarList";
+import {API_ERROR_MESSAGES, API_URLS, ERROR_MESSAGES, PUBSUB_TOPICS} from "../common/commonVarList";
 import * as ajaxServices from "../common/ajaxServices";
 import Score from "./Score";
 
@@ -15,6 +16,7 @@ class RantDetails extends Component {
         super(props);
         this.state = {
             isLoading: true,
+            isDeleteSuccess : false,
             rant:{
                 author: "",
                 comments: [],
@@ -29,6 +31,7 @@ class RantDetails extends Component {
         }
         this.rantId = this.props.match.params.id;
         this.loadRantDetails = this.loadRantDetails.bind(this)
+        this.deleteRant = this.deleteRant.bind(this)
 
         this.mySubscriber = this.mySubscriber.bind(this)
         let token = PubSub.subscribe(PUBSUB_TOPICS.REFRESH_RANT_DETAILS, this.mySubscriber);
@@ -57,6 +60,34 @@ class RantDetails extends Component {
         })
     }
 
+    deleteRant(){
+        let rant = this.state.rant;
+        ajaxServices.deleteMethod(API_URLS.DELETE_RANT, {
+            "postId": rant.id
+        }).then((data)=>{
+            console.log(data)
+            if(!data.ok){
+                this.setState({
+                    hasErr: true,
+                    errMsg: ERROR_MESSAGES.DELETE_RANT_RESPONSE_ERROR
+                })
+                PubSub.publish(PUBSUB_TOPICS.ALERT, {title:'Error', description:API_ERROR_MESSAGES[data.error], show:true})
+            }else{
+                this.setState({
+                    isDeleteSuccess:true
+                })
+                PubSub.publish(PUBSUB_TOPICS.REFRESH_RANT_LIST, '')
+            }
+        }).catch((err)=>{
+            console.error(err)
+        }).finally(()=>{
+            this.setState({
+                isLoading: false
+            })
+        })
+    }
+
+
     componentDidMount() {
         this.loadRantDetails()
     }
@@ -65,6 +96,7 @@ class RantDetails extends Component {
         let rant = this.state.rant;
         return (
             <div>
+                {this.state.isDeleteSuccess && <Redirect to='/'/>}
                 <Loader isLoading={this.state.isLoading}/>
 
                 <div className="rant-details layout--center">
@@ -90,7 +122,7 @@ class RantDetails extends Component {
                         </div>
                     </div>
                     <div className="post-hero__footer">
-                        {rant.isMyPost && <div className="post-hero__delete">DELETE</div>}
+                        {rant.isMyPost && <div className="post-hero__delete" onClick={this.deleteRant}>DELETE</div>}
                         <div className="post-hero__time">{rant.displayTime}</div>
                     </div>
                 </section>

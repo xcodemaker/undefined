@@ -11,6 +11,7 @@ const ERROR_MESSAGES = {
 
     ADD_RANT_RANT_BODY_EMPTY: 'Rant content is required !',
     ADD_RANT_RESPONSE_ERROR: 'Failed to add new rant !',
+    DELETE_RANT_RESPONSE_ERROR: 'Failed to delete rant !',
 
 };
 
@@ -30,7 +31,8 @@ const API_URLS = {
     RANT_DETAILS : 'https://api.devrant.thusitha.site/v1/post.details',
     RANT_LIST : 'https://api.devrant.thusitha.site/v1/post.list',
     VOTE : 'https://api.devrant.thusitha.site/v1/post.vote',
-    ADD_RANT : 'https://api.devrant.thusitha.site/v1/post.add'
+    ADD_RANT : 'https://api.devrant.thusitha.site/v1/post.add',
+    DELETE_RANT : 'https://api.devrant.thusitha.site/v1/post.delete'
 }
 
 const PUBSUB_TOPICS = {
