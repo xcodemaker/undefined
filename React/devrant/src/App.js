@@ -24,6 +24,7 @@ class App extends Component {
         }
         this.showHideLogin = this.showHideLogin.bind(this)
         this.loginSuccessCallback = this.loginSuccessCallback.bind(this)
+        this.signOut = this.signOut.bind(this)
     }
 
     showHideLogin(show){
@@ -45,6 +46,12 @@ class App extends Component {
         })
     }
 
+    signOut(){
+        commonMethods.clearLocalStorage()
+        this.loginSuccessCallback()
+    }
+
+
     componentWillMount(){
         if(!this.state.isLoggedIn){
             this.loginSuccessCallback()
@@ -61,7 +68,7 @@ class App extends Component {
                     {/*Start of Header */}
                     {/*======================= */}
 
-                   <Header showHideLogin={this.showHideLogin} isLoggedIn={this.state.isLoggedIn} username={this.state.username}/>
+                   <Header showHideLogin={this.showHideLogin} isLoggedIn={this.state.isLoggedIn} username={this.state.username} signOut={this.signOut}/>
 
                    {/* ======================= */}
                    {/* End of Header */}
@@ -69,8 +76,8 @@ class App extends Component {
                    {/* Start of Main Section */}
                    {/* ======================= */}
 
-                   {/*<section class="main layout--center">*/}
-                       {/*<div class="main__content layout--wrapped">*/}
+                   <section className="main layout--center">
+                       <div className="main__content layout--wrapped">
 
                            {/*/!* Start of Loader *!/*/}
                            {/*/!* ======================= *!/*/}
@@ -88,41 +95,7 @@ class App extends Component {
                            </Switch>
                    </Router>
 
-                           {/*/!* Start of Rant List Page *!/*/}
-                           {/*/!* ======================= *!/*/}
 
-                           {/*<div class="post-list">*/}
-
-                               {/*<article class="post">*/}
-                                   {/*<div class="post__inner">*/}
-                                       {/*<div class="score">*/}
-                                           {/*<div class="score__up layout--center">++</div>*/}
-                                           {/*<div class="score__board layout--center">100</div>*/}
-                                           {/*<div class="score__down layout--center">--</div>*/}
-                                       {/*</div>*/}
-                                       {/*<div class="post__body">*/}
-                                           {/*Hello World... </div>*/}
-                                   {/*</div>*/}
-                                   {/*<div class="post__footer">*/}
-                                       {/*<div class="post__time">2m ago</div>*/}
-                                       {/*<div class="post__comments">*/}
-                                           {/*<svg class="icon" viewBox="0 0 31 32">*/}
-                                               {/*<path d="M24.732 24.371v7.629l-7.267-7.267h-8.808c-4.781 */}
-                                    {/*0-8.657-3.875-8.657-8.657v-7.42c0-4.781 3.876-8.657 */}
-                                    {/*8.657-8.657h13.604c4.781 0 8.657 3.875 8.657 8.657v7.42c0 */}
-                                    {/*3.922-2.61 7.23-6.186 8.294z"></path>*/}
-                                           {/*</svg>*/}
-                                           {/*23*/}
-                                       {/*</div>*/}
-                                   {/*</div>*/}
-                               {/*</article>*/}
-
-                               {/*<div class="rant__add" title="Add Rant">+</div>*/}
-
-                           {/*</div>*/}
-
-                           {/*/!* ======================= *!/*/}
-                           {/*/!* End of Rant List Page *!/*/}
 
 
                            {/*/!* Start of Rant Details Page*!/*/}
@@ -204,8 +177,8 @@ class App extends Component {
                            {/*/!* ======================= *!/*/}
                            {/*/!* End of Rant Details Page*!/*/}
 
-                       {/*</div>*/}
-                   {/*</section>*/}
+                       </div>
+                   </section>
 
                    {/* ======================= */}
                    {/* End of Main Section */}
