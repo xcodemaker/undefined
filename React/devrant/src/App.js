@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Header from './components/Header'
 import './App.css';
+import Loader from "./components/Spinner";
 
 class App extends Component {
     render() {
@@ -27,9 +28,7 @@ class App extends Component {
                            {/*/!* Start of Loader *!/*/}
                            {/*/!* ======================= *!/*/}
 
-                           {/*/!* <div class="loader">*/}
-                             {/*<div class="spinner"></div>*/}
-                           {/*</div> *!/*/}
+                            <Loader/>
 
                            {/*/!* ======================= *!/*/}
                            {/*/!* End of loader *!/*/}
@@ -321,7 +320,7 @@ class App extends Component {
 
                {/* ======================= */}
                {/* End of alert popup */}
-               
+
            </div>
 
         );
