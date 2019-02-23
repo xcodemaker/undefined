@@ -14,6 +14,9 @@ import Login from "./components/Login";
 import * as commonMethods from './common/commonMethods';
 import * as ajaxServices from "./common/ajaxServices";
 import {API_URLS, ERROR_MESSAGES} from "./common/commonVarList";
+import PubSub from 'pubsub-js'
+import Alert from "./components/Alert";
+
 
 class App extends Component {
     constructor(props){
@@ -285,32 +288,7 @@ class App extends Component {
                {/* Start of alert popup */}
                {/* ======================= */}
 
-               {/* <div class="popup popup--open">
-               <div class="popup__header">
-                   <div title="Close" class="close layout--center">
-                       X
-                   </div>
-               </div>
-               <div class="popup__body layout--center">
-                   <div class="popup__body-inner">
-
-                       <div class="form">
-                           <div class="form__title">
-                               <span class="highlight">#</span>OOPS!
-                           </div>
-                           <div class="form__description">
-                               You can not vote on your own post :)
-                           </div>
-                           <form name="alert">
-                               <div class="alert">
-                                   <input type="submit" value="OK" />
-                               </div>
-                           </form>
-                       </div>
-
-                   </div>
-               </div>
-           </div> */}
+               <Alert/>
 
                {/* ======================= */}
                {/* End of alert popup */}
