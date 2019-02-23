@@ -19,6 +19,12 @@ class PostRant extends Component {
 
     }
 
+    componentWillReceiveProps(nextProps, nextContext) {
+        if (nextProps.isOpenNewRant) {
+            this.refs.rant_body.focus()
+        }
+    }
+
     hideNewRandPopup(){
         this.props.showNewRandPopup(false)
     }
@@ -43,7 +49,7 @@ class PostRant extends Component {
                            </div>
                            <form name="new-rant">
                                <div className="new-rant">
-                                   <textarea maxlength="140"></textarea>
+                                   <textarea ref="rant_body" maxlength="140"></textarea>
 
                                    <div className="loader">
                                        <div className="spinner"></div>
