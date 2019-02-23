@@ -13,6 +13,7 @@ class Alert extends Component {
             description: '',
             show: false
         }
+        this.handleClose = this.handleClose.bind(this)
     }
 
     componentDidMount() {
@@ -31,13 +32,20 @@ class Alert extends Component {
         })
     }
 
+    handleClose(e){
+        e.preventDefault();
+        this.setState({
+            show:false
+        })
+    }
+
     render() {
         return (
             <div>
                 {this.state.show &&
                 <div className="popup popup--open">
                     <div className="popup__header">
-                        <div title="Close" className="close layout--center">
+                        <div title="Close" className="close layout--center" onClick={this.handleClose}>
                             X
                         </div>
                     </div>
@@ -54,7 +62,7 @@ class Alert extends Component {
                                 </div>
                                 <form name="alert">
                                     <div className="alert">
-                                        <input type="submit" value="OK"/>
+                                        <input type="submit" value="OK" onClick={this.handleClose}/>
                                     </div>
                                 </form>
                             </div>
