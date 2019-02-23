@@ -24,6 +24,8 @@ import { PostListRefreshService } from './rant-list/rant-list.service';
 import { AlertComponent } from './alert/alert.component';
 import { AlertService } from './alert/alert.service';
 import { VoteSectionComponent } from './vote-section/vote-section.component';
+import { NewPostComponent } from './new-post/new-post.component';
+import { NewPostService } from './new-post/new-post.service';
 
 const appRoutes:Routes=[
   {path:'rant/:id',component:RantDetailsComponent},
@@ -41,7 +43,8 @@ const appRoutes:Routes=[
     RantListComponent,
     RantComponent,
     AlertComponent,
-    VoteSectionComponent
+    VoteSectionComponent,
+    NewPostComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,7 @@ const appRoutes:Routes=[
     HttpClientModule,
     StorageServiceModule
   ],
-  providers: [LoaderService ,LoginService, DevRantApiService ,HeaderService, LocalStorage, PostListRefreshService , AlertService],
+  providers: [LoaderService ,LoginService, DevRantApiService ,HeaderService, LocalStorage, PostListRefreshService , AlertService , NewPostService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

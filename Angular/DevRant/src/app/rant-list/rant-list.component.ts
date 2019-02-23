@@ -4,6 +4,7 @@ import { Rant, Post } from '../model/rant';
 import { post } from 'selenium-webdriver/http';
 import { LoaderService } from '../loader/loader.service';
 import { PostListRefreshService } from './rant-list.service';
+import { NewPostService } from '../new-post/new-post.service';
 
 @Component({
   selector: 'app-rant-list',
@@ -17,7 +18,7 @@ export class RantListComponent implements OnInit {
   posts:Post;
   // data:{ok:any,posts:any};
 
-  constructor(private devrantApi:DevRantApiService,private loaderService:LoaderService,private refreshService:PostListRefreshService) { }
+  constructor(private devrantApi:DevRantApiService,private loaderService:LoaderService,private refreshService:PostListRefreshService,private newPostService:NewPostService) { }
 
   ngOnInit() {
     console.log("before post list call");
@@ -55,6 +56,10 @@ export class RantListComponent implements OnInit {
         });
       }
     });
+  }
+
+  openNewPost(){
+    this.newPostService.display(true);
   }
 
 }
