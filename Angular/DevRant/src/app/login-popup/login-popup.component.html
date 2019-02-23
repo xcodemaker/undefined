@@ -20,7 +20,12 @@
           <div class="form__description">
             Vote and comment on others' rants. Post your own.
           </div>
-          <form name="login" [formGroup]="angForm" novalidate (keyup.enter)="keyDownFunction()">
+          <form
+            name="login"
+            [formGroup]="angForm"
+            novalidate
+            (keyup.enter)="keyDownFunction()"
+          >
             <div class="login">
               <div class="form-group loginCustom" *ngIf="showInputFeild">
                 <input
@@ -54,7 +59,7 @@
               >
                 <div *ngIf="angForm.controls['name'].errors.required">
                   <div class="form__error">
-                    {{name_error}}
+                    {{ name_error }}
                   </div>
                 </div>
               </div>
@@ -67,10 +72,16 @@
               >
                 <div *ngIf="angForm.controls['password'].errors.required">
                   <div class="form__error">
-                      {{password_error}}
+                    {{ password_error }}
                   </div>
                 </div>
+                
               </div>
+              <div *ngIf="loginFaild">
+                  <div class="form__error">
+                    {{ requestError }}
+                  </div>
+                </div>
               <div class="loginCustom">
                 <input
                   type="button"

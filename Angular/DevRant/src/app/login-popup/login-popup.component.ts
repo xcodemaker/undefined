@@ -20,8 +20,10 @@ export class LoginPopupComponent implements OnInit   {
   password='';
   isLoading:boolean=false;
   showInputFeild:boolean=true;
+  requestError:any="";
   // userName:any;
   loginInput: any = {};
+  loginFaild:boolean=false;
   //LoaderService is for the spinner
   constructor(private loginService: LoginService ,private renderer: Renderer2,private loaderService:LoaderService,private fb: FormBuilder,private devrantApi:DevRantApiService) {
     this.createForm();
@@ -51,6 +53,7 @@ export class LoginPopupComponent implements OnInit   {
   closeLoginPopup(){
     this.loginService.display(false);
     this.loaderService.display(false);
+    this.loginFaild=false;
     this.angForm.reset();
   }
 
@@ -61,6 +64,17 @@ export class LoginPopupComponent implements OnInit   {
     this.showInputFeild=false;
     this.devrantApi.userActivate(this.loginInput.username,this.loginInput.pass).subscribe(data => {
       console.log(data);
+      if(data.ok){
+        this.loginFaild=false;
+      }else{
+        this.loginFaild=true;
+        if(data.error=="INVALID_CREDENTIALS"){
+          console.log('login faild');
+          this.requestError="This can occur for invalid username and password or a wrong password for a given username.";
+        }else if(data.error=="SERVER_ERROR"){
+          this.requestError="A server side error has been occurred.";
+        }
+      }
       this.loaderService.display(false);
       this.isLoading=false;
       this.showInputFeild=true;
