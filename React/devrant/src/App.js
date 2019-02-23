@@ -33,9 +33,13 @@ class App extends Component {
     }
 
     loginSuccessCallback(){
-        let auth = commonMethods.getAuthData();
+        let auth = commonMethods.getAuthData()
+        let isLoggedIn = false
+        if(auth.token && auth.token !== ''){
+            isLoggedIn = true
+        }
         this.setState({
-            isLoggedIn: true,
+            isLoggedIn: isLoggedIn,
             username:auth.username,
             token:auth.token
         })
