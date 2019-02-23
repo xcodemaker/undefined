@@ -7,7 +7,11 @@ const ERROR_MESSAGES = {
     LOGIN_USERNAME_EMPTY: 'Username is required !',
     LOGIN_USERNAME_INVALID: 'Username is invalid !',
     LOGIN_PASSWORD_EMPTY: 'Password is required !',
-    LOGIN_RESPONSE_INVALID_CREDENTIALS : 'Invalid username or password'
+    LOGIN_RESPONSE_INVALID_CREDENTIALS : 'Invalid username or password',
+
+    ADD_RANT_RANT_BODY_EMPTY: 'Rant content is required !',
+    ADD_RANT_RESPONSE_ERROR: 'Failed to add new rant !',
+
 };
 
 const API_ERROR_MESSAGES = {
@@ -24,7 +28,8 @@ const API_URLS = {
     USER_DEACTIVATE: 'https://api.devrant.thusitha.site/v1/user.deactivate',
 
     RANT_LIST : 'https://api.devrant.thusitha.site/v1/post.list',
-    VOTE : 'https://api.devrant.thusitha.site/v1/post.vote'
+    VOTE : 'https://api.devrant.thusitha.site/v1/post.vote',
+    ADD_RANT : 'https://api.devrant.thusitha.site/v1/post.add'
 }
 
 const PUBSUB_TOPICS = {
