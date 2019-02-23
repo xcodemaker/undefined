@@ -1,0 +1,5 @@
+<div class="score">
+    <div class="score__up layout--center" [ngClass]="{'checked': id === 1 }" (click)="upVoteClick($event)">++</div>
+    <div class="score__board layout--center">{{post.votes}}</div>
+    <div class="score__down layout--center" [ngClass]="{'checked': id === -1 }" (click)="downVoteClick($event)">--</div>
+  </div>

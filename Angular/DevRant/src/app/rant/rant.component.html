@@ -1,11 +1,7 @@
 <a class="post" id="{{post.id}}" href="/rant/4543" style="text-decoration : none;">
     <!-- [routerLink]="['/rant/',post.id]" -->
     <div class="post__inner">
-      <div class="score">
-        <div class="score__up layout--center" [ngClass]="{'checked': id === 1 }" (click)="upVoteClick($event)">++</div>
-        <div class="score__board layout--center">{{post.votes}}</div>
-        <div class="score__down layout--center" [ngClass]="{'checked': id === -1 }" (click)="downVoteClick($event)">--</div>
-      </div>
+     <app-vote-section [data]="post"></app-vote-section>
       <div class="post__body">
         {{post.content}}
       </div>

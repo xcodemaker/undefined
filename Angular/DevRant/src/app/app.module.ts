@@ -23,6 +23,7 @@ import { RantComponent } from './rant/rant.component';
 import { PostListRefreshService } from './rant-list/rant-list.service';
 import { AlertComponent } from './alert/alert.component';
 import { AlertService } from './alert/alert.service';
+import { VoteSectionComponent } from './vote-section/vote-section.component';
 
 const appRoutes:Routes=[
   {path:'rant/:id',component:RantDetailsComponent},
@@ -39,7 +40,8 @@ const appRoutes:Routes=[
     LoginPopupComponent,
     RantListComponent,
     RantComponent,
-    AlertComponent
+    AlertComponent,
+    VoteSectionComponent
   ],
   imports: [
     BrowserModule,
