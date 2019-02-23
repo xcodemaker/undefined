@@ -33,7 +33,7 @@ class CommentsList extends Component {
 
                 <h1 className="comments__title"><span>#</span>Comments</h1>
 
-                {comments}
+                {comments.length > 0 ? comments : <span className="no-comments">No comments added.</span>}
 
             </section>
         )
