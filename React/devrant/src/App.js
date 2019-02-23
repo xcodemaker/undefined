@@ -41,6 +41,12 @@ class App extends Component {
         })
     }
 
+    componentWillMount(){
+        if(!this.state.isLoggedIn){
+            this.loginSuccessCallback()
+        }
+    }
+
     render() {
         return (
            <div>
