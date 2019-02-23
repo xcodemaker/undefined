@@ -21,15 +21,13 @@
               <input type="text" placeholder="USERNAME"  focus="true" />
               <input type="password" placeholder="PASSWORD" />
 
-              <!-- <div class="loader">
-                <div class="spinner"></div>
-              </div> -->
+              <app-loader></app-loader>
 
               <div class="form__error">
                 Some fields are missing !
               </div>
 
-              <input type="submit" value="LET ME IN" />
+              <input type="button" value="LET ME IN" (click)="submitClick()"  />
             </div>
           </form>
         </div>

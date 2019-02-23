@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, AfterContentInit, AfterViewInit, ElementRef, Renderer2 } from '@angular/core';
 import { LoginService } from './login-popup.service';
+import { LoaderService } from '../loader/loader.service';
 
 @Component({
   selector: 'app-login-popup',
@@ -10,7 +11,7 @@ export class LoginPopupComponent implements OnInit   {
 
   isOpen: boolean;
   //LoaderService is for the spinner
-  constructor(private loginService: LoginService ,private renderer: Renderer2) { }
+  constructor(private loginService: LoginService ,private renderer: Renderer2,private loaderService:LoaderService) { }
 
 //   @ViewChild('fieldName')
 // fieldName: any;
@@ -23,22 +24,19 @@ export class LoginPopupComponent implements OnInit   {
       this.isOpen = val;
     });
     // this.fieldName.focus();
+    // this.loaderService.display(true);
    
   }
 
-  // ngAfterViewInit(){
-  //   // this.renderer.selectRootElement(this.input["nativeElement"]).focus();
-  //   // this.input.nativeElement.focus();
-  //   setTimeout(() => {
-  //     this.input.nativeElement.focus();
-  //   }, 1000);
-  // }
 
   closeLoginPopup(){
     this.loginService.display(false);
+    this.loaderService.display(false);
   }
 
- 
+  submitClick(){
+    this.loaderService.display(true);
+  }
 
 
 
