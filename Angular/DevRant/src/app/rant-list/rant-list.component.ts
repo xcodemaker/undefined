@@ -14,7 +14,7 @@ export class RantListComponent implements OnInit {
 
   // rant:Rant={};
   // rant=new Rant();
-  // posts:Post;
+  posts:Post;
   // data:{ok:any,posts:any};
 
   constructor(private devrantApi:DevRantApiService,private loaderService:LoaderService,private refreshService:PostListRefreshService) { }

@@ -2,7 +2,9 @@ import { Component, OnInit, Input } from "@angular/core";
 import { DevRantApiService } from "../Service/devrant_api";
 import { Post } from "../model/rant";
 import { LoginService } from "../login-popup/login-popup.service";
-import { PostListRefreshService } from '../rant-list/rant-list.service';
+import { PostListRefreshService } from "../rant-list/rant-list.service";
+import { AlertService } from "../alert/alert.service";
+import { AlertData } from '../model/alert';
 
 @Component({
   selector: "app-rant",
@@ -13,16 +15,23 @@ export class RantComponent implements OnInit {
   @Input() data;
   post: Post;
   id: any;
+  alertdata:AlertData;
+  alertTitle: any = "";
+  alertDescription: any = "";
 
   constructor(
     private devrantApi: DevRantApiService,
     private loginService: LoginService,
-    private refreshService:PostListRefreshService
-  ) {}
+    private refreshService: PostListRefreshService,
+    private alertService: AlertService
+  ) {
+    this.alertdata={ "title" : "OPPS",
+    "description" : "You can not vote on your own post"};
+  }
 
   ngOnInit() {
     this.post = this.data;
-    console.log(this.post);
+    console.log("posts",this.data);
     if (this.post.myVote == 1) {
       this.addClass(1);
     } else if (this.post.myVote == -1) {
@@ -33,18 +42,18 @@ export class RantComponent implements OnInit {
     this.id = id;
   }
 
-  upVoteClick(){
-    if(this.post.myVote == 1){
+  upVoteClick() {
+    if (this.post.myVote == 1) {
       this.resetVote();
-    }else {
+    } else {
       this.upVote();
     }
   }
 
-  downVoteClick(){
-    if(this.post.myVote == -1){
+  downVoteClick() {
+    if (this.post.myVote == -1) {
       this.resetVote();
-    }else {
+    } else {
       this.downVote();
     }
   }
@@ -57,7 +66,11 @@ export class RantComponent implements OnInit {
       } else {
         if (data.error == "ACCESS_DENIED") {
           this.loginService.display(true);
-          
+        } else if (data.error == "AUTHOR_CANNOT_VOTE") {
+          this.alertdata={ "title" : "OPPS",
+          "description" : "You can not vote on your own post"};
+         
+          this.alertService.display(true);
         }
       }
     });
@@ -71,7 +84,6 @@ export class RantComponent implements OnInit {
       } else {
         if (data.error == "ACCESS_DENIED") {
           this.loginService.display(true);
-          
         }
       }
     });
@@ -85,7 +97,6 @@ export class RantComponent implements OnInit {
       } else {
         if (data.error == "ACCESS_DENIED") {
           this.loginService.display(true);
-         
         }
       }
     });

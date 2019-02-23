@@ -22,6 +22,7 @@ import { RantListComponent } from './rant-list/rant-list.component';
 import { RantComponent } from './rant/rant.component';
 import { PostListRefreshService } from './rant-list/rant-list.service';
 import { AlertComponent } from './alert/alert.component';
+import { AlertService } from './alert/alert.service';
 
 const appRoutes:Routes=[
   {path:'rant/:id',component:RantDetailsComponent},
@@ -49,7 +50,7 @@ const appRoutes:Routes=[
     HttpClientModule,
     StorageServiceModule
   ],
-  providers: [LoaderService ,LoginService, DevRantApiService ,HeaderService, LocalStorage, PostListRefreshService ],
+  providers: [LoaderService ,LoginService, DevRantApiService ,HeaderService, LocalStorage, PostListRefreshService , AlertService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
