@@ -42,7 +42,6 @@ class App extends Component {
 
     mySubscriber(msg, data) {
         if(msg === PUBSUB_TOPICS.ALERT){
-            console.log("lol")
             this.setState({
                 alertTitle:data.title,
                 alertDescription:data.description,
