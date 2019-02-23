@@ -73,4 +73,17 @@ export class DevRantApiService {
       options
     );
   }
+
+  resetVote(id: any) {
+    let headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      "X-Token": this.x_token
+    });
+    let options = { headers: headers };
+    return this.http.post(
+      CONST.VOTE,
+      { postId: id, direction: "reset" },
+      options
+    );
+  }
 }

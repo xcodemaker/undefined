@@ -20,6 +20,7 @@ import { HeaderService } from './header/header.service';
 import { LocalStorage } from './common/local-storage';
 import { RantListComponent } from './rant-list/rant-list.component';
 import { RantComponent } from './rant/rant.component';
+import { PostListRefreshService } from './rant-list/rant-list.service';
 
 const appRoutes:Routes=[
   {path:'rant/:id',component:RantDetailsComponent},
@@ -46,7 +47,7 @@ const appRoutes:Routes=[
     HttpClientModule,
     StorageServiceModule
   ],
-  providers: [LoaderService ,LoginService, DevRantApiService ,HeaderService, LocalStorage ],
+  providers: [LoaderService ,LoginService, DevRantApiService ,HeaderService, LocalStorage, PostListRefreshService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
