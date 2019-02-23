@@ -4,27 +4,25 @@
  */
 
 import React, {Component} from 'react';
+import Loader from "./Spinner";
 
 class Login extends Component {
 
     constructor(props){
         super(props)
-        this.state = {
-            isOpen : false
-        }
+        this.state = {}
+        this.hideLogin = this.hideLogin.bind(this)
     }
 
-    componentWillMount() {
-        this.setState({
-            isOpen : this.props.isOpen
-        })
+    hideLogin(){
+        this.props.showHideLogin(false)
     }
-
+    
     render() {
         return (
-            <div className={`popup ${this.state.isOpen?'popup--open':''}`}>
+            <div className={`popup ${this.props.isOpen?'popup--open':''}`}>
                <div className="popup__header">
-                   <div title="Close" className="close layout--center">
+                   <div title="Close" className="close layout--center" onClick={this.hideLogin}>
                        X
                    </div>
                </div>
@@ -44,9 +42,7 @@ class Login extends Component {
                                    <input type="text" placeholder="USERNAME" />
                                    <input type="password" placeholder="PASSWORD" />
 
-                                   <div className="loader">
-                                       <div className="spinner"></div>
-                                   </div>
+                                   <Loader/>
 
                                    <div className="form__error">
                                        Some fields are missing !
