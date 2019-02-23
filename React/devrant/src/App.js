@@ -177,7 +177,7 @@ class App extends Component {
                {/* Start of login popup */}
                {/* ======================= */}
 
-               <Login/>
+               <Login isOpen={true}/>
 
                {/* ======================= */}
                {/* End of login popup */}

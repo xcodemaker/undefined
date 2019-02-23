@@ -7,9 +7,22 @@ import React, {Component} from 'react';
 
 class Login extends Component {
 
+    constructor(props){
+        super(props)
+        this.state = {
+            isOpen : false
+        }
+    }
+
+    componentWillMount() {
+        this.setState({
+            isOpen : this.props.isOpen
+        })
+    }
+
     render() {
         return (
-            <div className="popup popup--open">
+            <div className={`popup ${this.state.isOpen?'popup--open':''}`}>
                <div className="popup__header">
                    <div title="Close" className="close layout--center">
                        X
