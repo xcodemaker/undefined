@@ -1,9 +1,9 @@
 <!-- Start of alert popup -->
 <!-- ======================= -->
 
-<div class="popup popup--open">
+<div class="popup popup--open" *ngIf="isOpen">
   <div class="popup__header">
-      <div title="Close" class="close layout--center">
+      <div title="Close" class="close layout--center" (click)="closeAlert()">
           X
       </div>
   </div>
@@ -15,12 +15,13 @@
                   <span class="highlight">#</span>{{alertTitle}}!
               </div>
               <div class="form__description">
-                  <!-- You can not vote on your own post :) -->
-                  {{alertDescription}}
+                  You can not vote on your own post :)
+                  <!-- {{alertDescription}} -->
               </div>
-              <form name="alert">
+              <form name="alert"  [formGroup]="angForm"
+              novalidate>
                   <div class="alert">
-                      <input type="submit" value="OK" />
+                      <input type="submit" value="OK" (click)="closeAlert()" />
                   </div>
               </form>
           </div>
