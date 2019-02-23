@@ -17,7 +17,12 @@ let getAuthData = () => {
     return auth
 }
 
+let clearLocalStorage = () => {
+    localStorage.clear()
+}
+
 export {
     storeAuthData,
-    getAuthData
+    getAuthData,
+    clearLocalStorage
 }

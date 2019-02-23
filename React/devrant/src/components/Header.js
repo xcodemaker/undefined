@@ -11,11 +11,16 @@ class Header extends Component{
         super(props)
         this.state = {}
         this.showLogin = this.showLogin.bind(this)
+        this.signOut = this.signOut.bind(this)
     }
 
 
     showLogin(){
         this.props.showHideLogin(true)
+    }
+
+    signOut(){
+        this.props.signOut()
     }
 
 
@@ -44,7 +49,7 @@ class Header extends Component{
 
                     <div className="join">
                         { this.props.isLoggedIn || <span onClick={this.showLogin}>Join</span>}
-                        { this.props.isLoggedIn && <span>Sign Out</span>}
+                        { this.props.isLoggedIn && <span onClick={this.signOut}>Sign Out</span>}
                     </div>
                 </div>
             </section>

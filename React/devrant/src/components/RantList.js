@@ -4,12 +4,13 @@
  */
 
 import React, {Component} from 'react';
+import Rant from "./Rant";
 
 class RantList extends Component {
 
     render() {
         return (
-            <h1>Rant List</h1>
+            <Rant/>
         )
     }
 }

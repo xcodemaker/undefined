@@ -93,9 +93,7 @@ class Login extends Component {
             ajaxServices.post('https://api.devrant.thusitha.site/v1/user.activate', {
                     "username": username,
                     "password": password
-                },
-                {},
-                {'Content-Type': 'application/json'}).then((data)=>{
+                }).then((data)=>{
                     console.log(data)
                 if(!data.ok){
                     this.setState({
