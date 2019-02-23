@@ -35,7 +35,8 @@ class Score extends Component {
                     console.log(API_ERROR_MESSAGES[data.error])
                     PubSub.publish(PUBSUB_TOPICS.ALERT, {title:'Error', description:API_ERROR_MESSAGES[data.error], show:true})
                 }
-                PubSub.publish(PUBSUB_TOPICS.REFRESH_RANT_LIST, '')
+                // PubSub.publish(PUBSUB_TOPICS.REFRESH_RANT_LIST, '')
+                PubSub.publish(PUBSUB_TOPICS.REFRESH_RANT_DETAILS, '')
 
             }).catch((err)=>{
                 console.error(err)
