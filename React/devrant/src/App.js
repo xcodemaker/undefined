@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from './components/Header'
 import './App.css';
 import Loader from "./components/Loader";
-import RantList from "./components/RantList";
+import RantListPage from "./containers/RantListPage";
 import RantDetails from "./components/RantDetails";
 import Login from "./components/Login";
 import * as commonMethods from './common/commonMethods';
@@ -90,7 +90,7 @@ class App extends Component {
 
                    <Router>
                            <Switch>
-                               <Route exact path='/' component={RantList}/>
+                               <Route exact path='/' component={RantListPage}/>
                                <Route path='/rant/:rantid' component={RantDetails}/>
                            </Switch>
                    </Router>
