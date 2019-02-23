@@ -30,6 +30,12 @@ class Login extends Component {
     componentWillReceiveProps(nextProps, nextContext) {
         if (nextProps.isOpen) {
             this.refs.login_username.focus()
+            this.refs.login_username.value = ''
+            this.refs.login_password.value = ''
+            this.setState({
+                hasErr: false,
+                errMsg : ''
+            })
         }
     }
 
