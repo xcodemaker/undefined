@@ -6,10 +6,10 @@
     <!-- ======================= -->
     <!-- End of loader -->
   <!-- <app-rant></app-rant> -->
-  <div *ngFor="let post of posts" style="display:inline">
+  <!-- <div *ngFor="let post of posts" style="display:inline"> -->
       
-        <app-rant [data]="post"></app-rant>
-    </div>
+        <app-rant *ngFor="let post of posts" [data]="post"></app-rant>
+    <!-- </div> -->
  
 </div>
 <div class="rant__add" title="Add Rant">+</div>

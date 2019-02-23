@@ -42,7 +42,8 @@ export class RantComponent implements OnInit {
     this.id = id;
   }
 
-  upVoteClick() {
+  upVoteClick(e) {
+e.preventDefault();
     if (this.post.myVote == 1) {
       this.resetVote();
     } else {
@@ -51,6 +52,7 @@ export class RantComponent implements OnInit {
   }
 
   downVoteClick() {
+    e.preventDefault();
     if (this.post.myVote == -1) {
       this.resetVote();
     } else {
