@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from '../login-popup/login-popup.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private loginServic: LoginService) { }
 
   ngOnInit() {
+  }
+
+  openLoginPopup(){
+    this.loginServic.display(true);
   }
 
 }

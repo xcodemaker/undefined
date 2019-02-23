@@ -10,12 +10,19 @@ export class LoginPopupComponent implements OnInit {
 
   isOpen: boolean;
   //LoaderService is for the spinner
-  constructor(private loaderService: LoginService) { }
+  constructor(private loginService: LoginService) { }
+
+ 
+
   //for the spinner
   ngOnInit() {
-    this.loaderService.status.subscribe((val: boolean) => {
+    this.loginService.status.subscribe((val: boolean) => {
       this.isOpen = val;
     });
+  }
+
+  closeLoginPopup(){
+    this.loginService.display(false);
   }
 
 }

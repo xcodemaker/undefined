@@ -10,14 +10,12 @@ import { LoginService } from '../login-popup/login-popup.service';
 })
 export class MainContentComponent implements OnInit {
 
-  constructor(private loaderService: LoaderService,private loginServic: LoginService) { }
+  constructor(private loaderService: LoaderService) { }
   async  delayLoader() {
     await delay(3000);
 
      this.loaderService.display(false);
-     this.loginServic.display(true);
-     await delay(3000);
-     this.loginServic.display(false);
+     
   }
 
   async  delay(ms: number) {
