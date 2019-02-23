@@ -18,6 +18,21 @@ let get = (url, params, headers) => {
     })
 }
 
+let post = (url, body, params, headers) => {
+    return new Promise((resolve, reject) => {
+        axios.post(url, {
+            params: params,
+            body: body,
+            headers:headers
+        }).then((response) => {
+            resolve(response);
+        }).catch((error) => {
+            reject(error);
+        })
+    })
+}
+
 export {
-    get
+    get,
+    post
 }

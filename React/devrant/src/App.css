@@ -650,3 +650,7 @@ html {
     transform: scale(1.02);
   }
 }
+
+
+/* custom css */
+.hidden { display:none; }
