@@ -1,12 +1,16 @@
-import React, {Component} from 'react';
 /**
  * Author : Nadun Chamikara
  * Date : 2019/02/23
  */
 
+import React, {Component} from 'react';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from './components/Header'
 import './App.css';
 import Loader from "./components/Spinner";
+import RantList from "./components/RantList";
+import RantDetails from "./components/RantDetails";
+import Login from "./components/Login";
 
 class App extends Component {
     render() {
@@ -14,7 +18,7 @@ class App extends Component {
            <div>
 
 
-               <div class="page">
+               <div className="page">
 
                     {/*Start of Header */}
                     {/*======================= */}
@@ -38,6 +42,13 @@ class App extends Component {
                            {/*/!* ======================= *!/*/}
                            {/*/!* End of loader *!/*/}
 
+
+                   <Router>
+                           <Switch>
+                               <Route exact path='/' component={RantList}/>
+                               <Route path='/rant/:rantid' component={RantDetails}/>
+                           </Switch>
+                   </Router>
 
                            {/*/!* Start of Rant List Page *!/*/}
                            {/*/!* ======================= *!/*/}
@@ -166,43 +177,7 @@ class App extends Component {
                {/* Start of login popup */}
                {/* ======================= */}
 
-               {/* <div class="popup popup--open">
-               <div class="popup__header">
-                   <div title="Close" class="close layout--center">
-                       X
-                   </div>
-               </div>
-               <div class="popup__body layout--center">
-                   <div class="popup__body-inner">
-
-                       <div class="form">
-                           <div class="form__title">
-                               JOIN <span class="highlight">#</span>DEVRANT
-                           </div>
-                           <div class="form__description">
-                               Vote and comment on others' rants. Post your own.
-                           </div>
-                           <form name="login">
-                               <div class="login">
-
-                                   <input type="text" placeholder="USERNAME" />
-                                   <input type="password" placeholder="PASSWORD" />
-
-                                   <div class="loader">
-                                       <div class="spinner"></div>
-                                   </div>
-
-                                   <div class="form__error">
-                                       Some fields are missing !
-                                   </div>
-
-                                   <input type="submit" value="LET ME IN" />
-                               </div>
-                           </form>
-                       </div>
-                   </div>
-               </div>
-           </div> */}
+               <Login isOpen={true}/>
 
                {/* ======================= */}
                {/* End of login popup */}
