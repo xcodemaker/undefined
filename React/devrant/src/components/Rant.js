@@ -27,7 +27,6 @@ class Rant extends Component {
                 "myVote": 0,
                 "commentCount": 0
             }
-
         }
 
     }
@@ -75,9 +74,9 @@ class Rant extends Component {
             <Link className="post" to={'/rant/'+this.state.rant.id} >
                 <div className="post__inner">
                     <div className="score">
-                        <div className={`score__up layout--center ${rant.myVote==1?'checked':''}`} onClick={()=>{this.vote('up')}}>++</div>
+                        <div className={`score__up layout--center ${rant.myVote==1?'checked':''}`} onClick={(e)=>{e.preventDefault(); this.vote('up')}}>++</div>
                         <div className="score__board layout--center">{rant.votes}</div>
-                        <div className={`score__down layout--center ${rant.myVote==-1?'checked':''}`} onClick={()=>{this.vote('down')}}>--</div>
+                        <div className={`score__down layout--center ${rant.myVote==-1?'checked':''}`} onClick={(e)=>{e.preventDefault(); this.vote('down')}}>--</div>
                     </div>
                     <div className="post__body">
                         {rant.content}
