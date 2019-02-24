@@ -4,7 +4,7 @@
  */
 
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom'
+import Avatar from "../util/Avatar";
 
 class Header extends Component{
 
@@ -14,7 +14,6 @@ class Header extends Component{
         this.showLogin = this.showLogin.bind(this)
         this.signOut = this.signOut.bind(this)
     }
-
 
     showLogin(){
         this.props.showHideLogin(true)
@@ -38,14 +37,16 @@ class Header extends Component{
 
                     {/*User Profile*/}
                     { this.props.isLoggedIn &&
-                    <div className="profile layout--center">
-                        <div className="profile__picture">
-                            <svg height="36" width="36">
-                                <circle cx="18" cy="18" r="18" fill="#5c5f6f"></circle>
-                            </svg>
+                        <div className="profile layout--center">
+                            <div className="profile__picture">
+                                {/*<svg height="36" width="36">*/}
+                                    {/*<circle cx="18" cy="18" r="18" fill="#5c5f6f"></circle>*/}
+                                {/*</svg>*/}
+                                <Avatar size={36} username={this.props.username}/>
+
+                            </div>
+                            <div className="profile__name">{this.props.username}</div>
                         </div>
-                        <div className="profile__name">{this.props.username}</div>
-                    </div>
                     }
 
                     <div className="join">

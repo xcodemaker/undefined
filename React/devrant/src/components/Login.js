@@ -85,7 +85,6 @@ class Login extends Component {
         }
 
         if (isValid) {
-            console.log("ALl valid")
             this.hideError()
             this.setState({
                 isLoading: true
@@ -94,7 +93,6 @@ class Login extends Component {
                     "username": username,
                     "password": password
                 }).then((data)=>{
-                    console.log(data)
                 if(!data.ok){
                     this.setState({
                         hasErr: true,

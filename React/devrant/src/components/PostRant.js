@@ -68,7 +68,6 @@ class PostRant extends Component {
             ajaxServices.post(API_URLS.ADD_RANT, {
                 "content": rantContent
             }).then((data)=>{
-                console.log(data)
                 if(!data.ok){
                     this.setState({
                         hasErr: true,

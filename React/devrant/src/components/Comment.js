@@ -7,6 +7,7 @@ import React, {Component} from 'react';
 import * as ajaxServices from "../common/ajaxServices";
 import {API_ERROR_MESSAGES, API_URLS, ERROR_MESSAGES, PUBSUB_TOPICS} from "../common/commonVarList";
 import PubSub from "pubsub-js";
+import Avatar from "../util/Avatar";
 
 class Comment extends Component {
 
@@ -41,7 +42,6 @@ class Comment extends Component {
             "postId": this.state.rantId,
             "commentId": comment.id
         }).then((data)=>{
-            console.log(data)
             if(!data.ok){
                 this.setState({
                     hasErr: true,
@@ -65,9 +65,11 @@ class Comment extends Component {
                     <div className="comment__body">
                         <div className="profile">
                             <div className="profile__picture">
-                                <svg height="36" width="36">
-                                    <circle cx="18" cy="18" r="18" fill="#5c5f6f"/>
-                                </svg>
+                                {/*<svg height="36" width="36">*/}
+                                    {/*<circle cx="18" cy="18" r="18" fill="#5c5f6f"/>*/}
+                                {/*</svg>*/}
+                                <Avatar size={36} username={comment.author}/>
+
                             </div>
                             <div className="profile__name">
                                 {comment.author}

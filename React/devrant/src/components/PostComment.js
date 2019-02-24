@@ -70,7 +70,6 @@ class PostComment extends Component {
                 "postId": this.state.rantId,
                 "comment": commentContent
             }).then((data)=>{
-                console.log(data)
                 if(!data.ok){
                     this.setState({
                         hasErr: true,

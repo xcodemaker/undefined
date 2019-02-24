@@ -14,6 +14,7 @@ import CommentsList from "./CommentsList";
 import * as commonMethods from "../common/commonMethods";
 import PostRant from "./PostRant";
 import PostComment from "./PostComment";
+import Avatar from "../util/Avatar";
 
 class RantDetails extends Component {
     constructor(props) {
@@ -51,7 +52,6 @@ class RantDetails extends Component {
 
     loadRantDetails() {
         ajaxServices.get(API_URLS.RANT_DETAILS, {'postId':this.rantId}).then((data) => {
-            console.log(data)
             if (data.ok) {
                 this.setState({
                     rant: data.post
@@ -71,7 +71,6 @@ class RantDetails extends Component {
         ajaxServices.deleteMethod(API_URLS.DELETE_RANT, {
             "postId": rant.id
         }).then((data)=>{
-            console.log(data)
             if(!data.ok){
                 this.setState({
                     hasErr: true,
@@ -131,9 +130,11 @@ class RantDetails extends Component {
                         <div className="post-hero__body">
                             <div className="profile">
                                 <div className="profile__picture">
-                                    <svg height="36" width="36">
-                                        <circle cx="18" cy="18" r="18" fill="#5c5f6f"/>
-                                    </svg>
+                                    {/*<svg height="36" width="36">*/}
+                                        {/*<circle cx="18" cy="18" r="18" fill="#5c5f6f"/>*/}
+                                    {/*</svg>*/}
+                                    <Avatar size={36} username={rant.author}/>
+
                                 </div>
                                 <div className="profile__name">
                                     {rant.author}
