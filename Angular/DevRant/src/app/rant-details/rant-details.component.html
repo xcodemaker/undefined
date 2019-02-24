@@ -1,12 +1,11 @@
+<app-loader></app-loader>
 <section class="main layout--center">
     <div class="main__content layout--wrapped">
 <div class="rant-details layout--center">
   <section class="post-hero">
     <div class="post-hero__inner">
       <div class="score">
-        <div class="score__up layout--center">++</div>
-        <div class="score__board layout--center">100</div>
-        <div class="score__down layout--center">--</div>
+          <app-vote-section [data]="post"></app-vote-section>
       </div>
       <div class="post-hero__body">
         <div class="profile">
@@ -16,17 +15,17 @@
             </svg>
           </div>
           <div class="profile__name">
-            Elon
+            {{post.author}}
           </div>
         </div>
         <div class="post__details">
-          Lorem ipsum
+            {{post.content}}
         </div>
       </div>
     </div>
     <div class="post-hero__footer">
-      <div class="post-hero__delete">DELETE</div>
-      <div class="post-hero__time">2m ago</div>
+      <div class="post-hero__delete" *ngIf="isMyPost" (click)="deletePost()">DELETE</div>
+      <div class="post-hero__time">{{post.displayTime}}</div>
     </div>
   </section>
 

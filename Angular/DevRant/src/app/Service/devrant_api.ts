@@ -54,11 +54,7 @@ export class DevRantApiService {
       "X-Token": this.x_token
     });
     let options = { headers: headers };
-    return this.http.post(
-      CONST.VOTE,
-      { postId: id, direction: "up" },
-      options
-    );
+    return this.http.post(CONST.VOTE, { postId: id, direction: "up" }, options);
   }
 
   downVote(id: any) {
@@ -93,10 +89,27 @@ export class DevRantApiService {
       "X-Token": this.x_token
     });
     let options = { headers: headers };
-    return this.http.post(
-      CONST.ADD_NEW_POST,
-      { "content": content },
-      options
-    );
+    return this.http.post(CONST.ADD_NEW_POST, { content: content }, options);
+  }
+
+  getPostDeatils(id: any) {
+    let headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      "X-Token": this.x_token
+    });
+    let options = { headers: headers };
+    return this.http.get(CONST.POST_DETAILS + id, options);
+  }
+
+  deletePost(postId: any) {
+    let headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      "X-Token": this.x_token
+    });
+    // let a =new RequestOptionsArgs(){
+
+    // }
+    let options = { body: { postId: postId }, headers: headers };
+    return this.http.request("delete", CONST.POST_DELETE, options);
   }
 }

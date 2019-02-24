@@ -4,6 +4,8 @@ import { LoginService } from '../login-popup/login-popup.service';
 import { PostListRefreshService } from '../rant-list/rant-list.service';
 import { AlertService } from '../alert/alert.service';
 import { Post } from '../model/rant';
+import { VoteService } from './vote-section.service';
+import { PostDetailsRefreshService } from '../rant-details/rant-details.service';
 
 @Component({
   selector: 'app-vote-section',
@@ -12,23 +14,34 @@ import { Post } from '../model/rant';
 })
 export class VoteSectionComponent implements OnInit {
   @Input() data;
-  post: Post;
+  post: any;
   id: any;
 
   constructor(private devrantApi: DevRantApiService,
     private loginService: LoginService,
     private refreshService: PostListRefreshService,
-    private alertService: AlertService){}
+    private refreshService2: PostDetailsRefreshService,
+    private alertService: AlertService,private voteService:VoteService){}
 
   ngOnInit() {
-    console.log(this.data);
+      this.voteService.status.subscribe((val: any) => {
+        this.post = val;
+        console.log("val",val);
+        if (this.post.myVote == 1) {
+          this.addClass(1);
+        } else if (this.post.myVote == -1) {
+          this.addClass(-1);
+        }
+      });
+    console.log("vote :",this.data);
     this.post = this.data;
-    console.log("posts",this.data);
     if (this.post.myVote == 1) {
       this.addClass(1);
     } else if (this.post.myVote == -1) {
       this.addClass(-1);
     }
+    // console.log("posts",this.data);
+    
   }
   addClass(id: any) {
     this.id = id;
@@ -57,6 +70,7 @@ e.preventDefault();
       console.log(data);
       if (data.ok) {
         this.refreshService.refresh(true);
+        this.refreshService2.refresh(true);
       } else {
         if (data.error == "ACCESS_DENIED") {
           this.loginService.display(true);
@@ -75,6 +89,7 @@ e.preventDefault();
       console.log(data);
       if (data.ok) {
         this.refreshService.refresh(true);
+        this.refreshService2.refresh(true);
       } else {
         if (data.error == "ACCESS_DENIED") {
           this.loginService.display(true);
@@ -88,6 +103,7 @@ e.preventDefault();
       console.log(data);
       if (data.ok) {
         this.refreshService.refresh(true);
+        this.refreshService2.refresh(true);
       } else {
         if (data.error == "ACCESS_DENIED") {
           this.loginService.display(true);
