@@ -4,7 +4,7 @@ Eyepax JS Hackathon 2019 Projects
 
 ### Angular Project
 
-Live demo available at 
+Live demo available at https://devrant-angular.herokuapp.com/
 
 ### ReactJS Project
 
