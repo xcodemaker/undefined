@@ -31,6 +31,7 @@ import { PostDetailsRefreshService } from "./rant-details/rant-details.service";
 import { CommentComponent } from './comment/comment.component';
 import { NewCommentComponent } from './new-comment/new-comment.component';
 import { NewCommentService } from './new-comment/new-comment.service';
+import { MainRefreshService } from './main-content/refresh.service';
 
 const appRoutes: Routes = [
   { path: "rant/:id", component: RantDetailsComponent },
@@ -73,7 +74,8 @@ const appRoutes: Routes = [
     NewPostService,
     VoteService,
     PostDetailsRefreshService,
-    NewCommentService
+    NewCommentService,
+    MainRefreshService
   ],
   bootstrap: [AppComponent]
 })

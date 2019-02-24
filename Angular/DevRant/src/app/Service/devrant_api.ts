@@ -18,6 +18,15 @@ export class DevRantApiService {
     }
   }
 
+  refresh(){
+    if (this.storage.getStorageData("login") != null) {
+      let login = this.storage.getStorageData("login");
+      if (login) {
+        this.x_token = this.storage.getStorageData("token");
+      }
+    }
+  }
+
   userActivate(username: string, password: string) {
     let headers = new HttpHeaders({
       "Content-Type": "application/json"

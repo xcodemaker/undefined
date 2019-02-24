@@ -5,6 +5,7 @@ import { LoginService } from "../login-popup/login-popup.service";
 import { LocalStorage } from "../common/local-storage";
 import { HeaderService } from "../header/header.service";
 import { AlertService } from '../alert/alert.service';
+import { MainRefreshService } from './refresh.service';
 
 @Component({
   selector: "app-main-content",
@@ -16,7 +17,8 @@ export class MainContentComponent implements OnInit {
     private loaderService: LoaderService,
     private storage: LocalStorage,
     private headerService: HeaderService,
-    private alertService:AlertService
+    private alertService:AlertService,
+    private refreshService:MainRefreshService
   ) {
     if (storage.getStorageData("login") != null) {
       let login = storage.getStorageData("login");
@@ -25,21 +27,17 @@ export class MainContentComponent implements OnInit {
       }
     }
   }
-  // async delayLoader() {
-  //   await delay(3000);
-
-    // this.loaderService.display(false);
-  // }
-
-  // async delay(ms: number) {
-  //   return new Promise(resolve => setTimeout(resolve, ms));
-  // }
+ 
 
   ngOnInit() {
-    //http call starts
-    // this.alertService.display(true);
-    // this.delayLoader();
-
-    //http call ends
+    this.refreshService.status.subscribe((val: boolean) => {
+        if (this.storage.getStorageData("login") != null) {
+      let login = this.storage.getStorageData("login");
+      if (login) {
+        this.headerService.login(true);
+      }
+    }
+    });
   }
+
 }
