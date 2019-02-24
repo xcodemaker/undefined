@@ -63,6 +63,7 @@ export class NewCommentComponent implements OnInit {
       console.log(data);
       if (data.ok) {
         this.newCommentService.display(false);
+        this.devrantApi.refresh();
         this.refreshPostDetails.refresh(true);
       } else {
         if (data.error == "INVALID_CREDENTIALS") {
