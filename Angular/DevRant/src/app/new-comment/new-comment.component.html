@@ -1,22 +1,24 @@
-<!-- Start of post popup -->
+<!-- Start of comment popup -->
 <!-- ======================= -->
 
 <div class="popup popup--open" *ngIf="isOpen">
   <div class="popup__header">
-    <div title="Close" class="close layout--center" (click)="closeNewPost()">
+    <div title="Close" class="close layout--center" (click)="closeCommentPost()">
       X
     </div>
   </div>
   <div class="popup__body layout--center">
     <div class="popup__body-inner">
       <div class="form">
-        <div class="form__title">NEW <span class="highlight">#</span>RANT</div>
-        <div class="form__description">
-          Express yourself with 140 characters.
+        <div class="form__title">
+          NEW <span class="highlight">#</span>COMMENT
         </div>
-        <form name="new-rant" [formGroup]="angForm" novalidate>
-          <div class="new-rant">
-            <div class="form-group newpostCustom" *ngIf="showInputFeild">
+        <div class="form__description">
+          Comment with 140 characters.
+        </div>
+        <form name="new-comment" [formGroup]="angForm" novalidate>
+          <div class="new-comment">
+            <div class="form-group" *ngIf="showInputFeild">
               <textarea
                 maxlength="140"
                 focus="true"
@@ -44,11 +46,10 @@
             <!-- <div class="newpostCustom"> -->
             <input
               type="submit"
-              value="POST"
+              value="COMMENT"
               (click)="submitClick()"
               [disabled]="angForm.pristine || angForm.invalid || isLoading"
             />
-            <!-- </div> -->
           </div>
         </form>
       </div>
@@ -57,4 +58,4 @@
 </div>
 
 <!-- ======================= -->
-<!-- End of post popup -->
+<!-- End of comment popup -->

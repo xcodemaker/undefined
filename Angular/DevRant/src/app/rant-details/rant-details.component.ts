@@ -8,6 +8,7 @@ import { VoteService } from "../vote-section/vote-section.service";
 import { PostDetailsRefreshService } from "./rant-details.service";
 import { LoaderService } from "../loader/loader.service";
 import { Router } from "@angular/router";
+import { NewCommentService } from '../new-comment/new-comment.service';
 
 @Component({
   selector: "app-rant-details",
@@ -28,7 +29,8 @@ export class RantDetailsComponent implements OnInit {
     private voteService: VoteService,
     private refreshService: PostDetailsRefreshService,
     private loaderService: LoaderService,
-    private router: Router
+    private router: Router,
+    private commentService:NewCommentService
   ) {
     if (storage.getStorageData("login") != null) {
       let login = storage.getStorageData("login");
@@ -94,5 +96,9 @@ export class RantDetailsComponent implements OnInit {
       } else {
       }
     });
+  }
+
+  openNewComment(){
+this.commentService.display(true);
   }
 }

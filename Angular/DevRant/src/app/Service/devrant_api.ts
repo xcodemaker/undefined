@@ -124,4 +124,13 @@ export class DevRantApiService {
     let options = { body: { postId: postId,commentId:commentId }, headers: headers };
     return this.http.request("delete", CONST.COMMENT_DELETE, options);
   }
+
+  addNewComment(postId:any,comment: any) {
+    let headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      "X-Token": this.x_token
+    });
+    let options = { headers: headers };
+    return this.http.post(CONST.ADD_COOMENT, {postId:postId, comment: comment }, options);
+  }
 }
