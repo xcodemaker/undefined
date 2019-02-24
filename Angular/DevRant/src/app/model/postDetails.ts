@@ -12,10 +12,10 @@ export class PostDetail {
     isMyPost:    boolean;
     displayTime: string;
     myVote:      number;
-    comments:    Comment[];
+    comments:    CommentItem[];
 }
 
-export class Comment {
+export class CommentItem {
     comment:     string;
     id:          string;
     timestamp:   number;

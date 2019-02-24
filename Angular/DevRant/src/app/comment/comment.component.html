@@ -1,0 +1,24 @@
+<section class="comment">
+    <div class="comment__inner">
+      <div class="comment__body">
+        <div class="profile">
+          <div class="profile__picture">
+            <svg height="36" width="36">
+              <circle cx="18" cy="18" r="18" fill="#5c5f6f" />
+            </svg>
+          </div>
+          <div class="profile__name">
+            {{comment.author}}
+          </div>
+        </div>
+        <div class="post__details">
+            {{comment.comment}}
+          <br />
+        </div>
+      </div>
+    </div>
+    <div class="comment__footer">
+      <div class="comment__delete" *ngIf="ismyComment" (click)="deleteComment()">DELETE</div>
+      <div class="comment__time"> {{comment.displayTime}}</div>
+    </div>
+  </section>

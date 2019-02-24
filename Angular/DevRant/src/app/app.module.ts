@@ -28,6 +28,7 @@ import { NewPostComponent } from "./new-post/new-post.component";
 import { NewPostService } from "./new-post/new-post.service";
 import { VoteService } from "./vote-section/vote-section.service";
 import { PostDetailsRefreshService } from "./rant-details/rant-details.service";
+import { CommentComponent } from './comment/comment.component';
 
 const appRoutes: Routes = [
   { path: "rant/:id", component: RantDetailsComponent },
@@ -46,7 +47,8 @@ const appRoutes: Routes = [
     RantComponent,
     AlertComponent,
     VoteSectionComponent,
-    NewPostComponent
+    NewPostComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,

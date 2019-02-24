@@ -32,30 +32,16 @@
   <section class="comments layout--center">
     <h1 class="comments__title"><span>#</span>Comments</h1>
 
-    <section class="comment">
-      <div class="comment__inner">
-        <div class="comment__body">
-          <div class="profile">
-            <div class="profile__picture">
-              <svg height="36" width="36">
-                <circle cx="18" cy="18" r="18" fill="#5c5f6f" />
-              </svg>
-            </div>
-            <div class="profile__name">
-              Elon
-            </div>
-          </div>
-          <div class="post__details">
-            Lorem ipsum
-            <br />
-          </div>
-        </div>
-      </div>
-      <div class="comment__footer">
-        <div class="comment__delete">DELETE</div>
-        <div class="comment__time">2m ago</div>
-      </div>
-    </section>
+    <div *ngIf="noComment" class="nocomment" style="color: #d31c41;
+    padding: 0 0 12px 0;
+    text-align: center;
+    width: 100%;
+    font-size: 18px;">
+        No comments added.
+    </div>
+
+    <app-comment *ngFor="let comment of comments" [data]="comment"></app-comment>
+   
   </section>
 
   <div class="rant__comment layout--center" title="Comment">

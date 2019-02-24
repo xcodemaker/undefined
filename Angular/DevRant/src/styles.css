@@ -514,6 +514,14 @@ a:active {color:white;}
   width: 100%;
   font-size: 18px;
 }
+
+.nocomment {
+  color: #d31c41;
+  padding: 0 0 12px 0;
+  text-align: center;
+  width: 100%;
+  font-size: 18px;
+}
 .popup .popup__body .popup__body-inner input[type=submit] {
   background: transparent;
   outline: none;
