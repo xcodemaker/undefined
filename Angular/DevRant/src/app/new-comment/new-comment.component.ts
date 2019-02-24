@@ -6,6 +6,7 @@ import { LoaderService } from "../loader/loader.service";
 import { DevRantApiService } from "../Service/devrant_api";
 import { NewCommentService } from "./new-comment.service";
 import { PostDetailsRefreshService } from '../rant-details/rant-details.service';
+import { CommentRefreshService } from '../comment/comment.service';
 
 @Component({
   selector: "app-new-comment",
@@ -28,7 +29,8 @@ export class NewCommentComponent implements OnInit {
     private newCommentService: NewCommentService,
     private loaderService: LoaderService,
     private devrantApi: DevRantApiService,
-    private refreshPostDetails:PostDetailsRefreshService
+    private refreshPostDetails:PostDetailsRefreshService,
+    private commentRefresh:CommentRefreshService
   ) {
     this.createForm();
     var url = window.location.pathname;
@@ -59,11 +61,14 @@ export class NewCommentComponent implements OnInit {
     this.loaderService.display(true);
     this.isLoading = true;
     this.showInputFeild = false;
-    this.devrantApi.addNewComment(this.id,this.loginInput.username).subscribe(data => {
+    this.devrantApi.addNewComment(this.id,this.loginInput.username).subscribe((data:any) => {
       console.log(data);
       if (data.ok) {
         this.newCommentService.display(false);
-        this.devrantApi.refresh();
+        window.location.reload();
+        // this.devrantApi.refresh();
+        this.commentRefresh.display(true);
+        
         this.refreshPostDetails.refresh(true);
       } else {
         if (data.error == "INVALID_CREDENTIALS") {

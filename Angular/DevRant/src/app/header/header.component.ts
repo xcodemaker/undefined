@@ -40,7 +40,7 @@ export class HeaderComponent implements OnInit {
   }
 
   clickLogout() {
-    this.devrantApi.userDeactivate().subscribe(data => {
+    this.devrantApi.userDeactivate().subscribe((data:any) => {
       console.log(data);
       if (data.ok) {
         this.storage.clearData("login");

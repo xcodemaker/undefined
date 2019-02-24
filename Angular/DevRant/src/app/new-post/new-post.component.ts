@@ -46,7 +46,7 @@ export class NewPostComponent implements OnInit {
     this.loaderService.display(true);
     this.isLoading=true;
     this.showInputFeild=false;
-    this.devrantApi.addNewPost(this.loginInput.username).subscribe(data => {
+    this.devrantApi.addNewPost(this.loginInput.username).subscribe((data:any) => {
       console.log(data);
       if(data.ok){
        

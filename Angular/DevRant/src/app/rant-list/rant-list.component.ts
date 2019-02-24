@@ -36,7 +36,7 @@ export class RantListComponent implements OnInit {
   ngOnInit() {
     console.log("before post list call");
     this.loaderService.display(true);
-    this.devrantApi.getAllPost().subscribe(data => {
+    this.devrantApi.getAllPost().subscribe((data:any) => {
       console.log("post list call");
       // this.data=data;
       if (data.ok) {
@@ -51,7 +51,7 @@ export class RantListComponent implements OnInit {
       console.log("refresh page");
       if (val) {
         this.loaderService.display(true);
-        this.devrantApi.getAllPost().subscribe(data => {
+        this.devrantApi.getAllPost().subscribe((data:any) => {
           console.log("post list call");
           // this.data=data;
           if (data.ok) {

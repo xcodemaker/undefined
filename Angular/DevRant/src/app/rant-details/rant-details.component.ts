@@ -43,7 +43,7 @@ export class RantDetailsComponent implements OnInit {
     var urlsplit = url.split("/").slice(-1)[0];
     console.log("id :", urlsplit);
     this.id = urlsplit;
-    this.devrantApi.getPostDeatils(this.id).subscribe(data => {
+    this.devrantApi.getPostDeatils(this.id).subscribe((data:any) => {
       console.log("post list call");
       // this.data=data;
       if (data.ok) {
@@ -64,7 +64,7 @@ export class RantDetailsComponent implements OnInit {
       console.log("refresh page");
       if (val) {
         this.loaderService.display(true);
-        this.devrantApi.getPostDeatils(this.id).subscribe(data => {
+        this.devrantApi.getPostDeatils(this.id).subscribe((data:any) => {
           console.log("post list call");
           // this.data=data;
           if (data.ok) {
@@ -82,7 +82,7 @@ export class RantDetailsComponent implements OnInit {
 
   deletePost() {
     this.loaderService.display(true);
-    this.devrantApi.deletePost(this.id).subscribe(data => {
+    this.devrantApi.deletePost(this.id).subscribe((data:any) => {
       console.log("post list call");
       // this.data=data;
       if (data.ok) {

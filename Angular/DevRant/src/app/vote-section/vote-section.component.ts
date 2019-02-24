@@ -66,7 +66,7 @@ e.preventDefault();
   }
 
   upVote() {
-    this.devrantApi.upVote(this.post.id).subscribe(data => {
+    this.devrantApi.upVote(this.post.id).subscribe((data:any) => {
       console.log(data);
       if (data.ok) {
         this.refreshService.refresh(true);
@@ -75,8 +75,8 @@ e.preventDefault();
         if (data.error == "ACCESS_DENIED") {
           this.loginService.display(true);
         } else if (data.error == "AUTHOR_CANNOT_VOTE") {
-          this.alertdata={ "title" : "OPPS",
-          "description" : "You can not vote on your own post"};
+          // this.alertdata={ "title" : "OPPS",
+          // "description" : "You can not vote on your own post"};
          
           this.alertService.display(true);
         }
@@ -85,7 +85,7 @@ e.preventDefault();
   }
 
   resetVote() {
-    this.devrantApi.resetVote(this.post.id).subscribe(data => {
+    this.devrantApi.resetVote(this.post.id).subscribe((data:any) => {
       console.log(data);
       if (data.ok) {
         this.refreshService.refresh(true);
@@ -99,7 +99,7 @@ e.preventDefault();
   }
 
   downVote() {
-    this.devrantApi.downVote(this.post.id).subscribe(data => {
+    this.devrantApi.downVote(this.post.id).subscribe((data:any) => {
       console.log(data);
       if (data.ok) {
         this.refreshService.refresh(true);

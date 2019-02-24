@@ -86,7 +86,7 @@ export class LoginPopupComponent implements OnInit {
     this.showInputFeild = false;
     this.devrantApi
       .userActivate(this.loginInput.username, this.loginInput.pass)
-      .subscribe(data => {
+      .subscribe((data:any) => {
         console.log(data);
         if (data.ok) {
           this.loginFaild = false;
